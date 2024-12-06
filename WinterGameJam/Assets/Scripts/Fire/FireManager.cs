@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider2D), typeof(Animator), typeof(FireHeatBuff))]
+[RequireComponent( typeof(Animator), typeof(FireHeatBuff))]
 [RequireComponent(typeof(FireLevel), typeof(FireAnimationManager))]
 public class FireManager : MonoBehaviour
 {
