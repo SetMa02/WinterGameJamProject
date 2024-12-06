@@ -1,33 +1,32 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
 public class FireHeatTransfer : MonoBehaviour
 {
-    private SphereCollider _sphereCollider;
-    private float _temperatureInreaseRate;
+	private SphereCollider _sphereCollider;
+	private FireManager _fireManager;
 
-    public void SetTemperatureIncreaseRate(float temperatureInreaseRate)
-    {
-        _temperatureInreaseRate = temperatureInreaseRate;
-    }
-    
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.TryGetComponent<PlayerStatus>(out PlayerStatus playerStatus))
-        {
-            playerStatus.SetTemperatureIncreaseRate(_temperatureInreaseRate);
-            playerStatus.SetNearFire(true);
-        }
-    }
+	private void Start()
+	{
+		_sphereCollider = GetComponent<SphereCollider>();
+		_sphereCollider.isTrigger = true;
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.TryGetComponent<PlayerStatus>(out PlayerStatus playerStatus))
-        {
-            playerStatus.SetNearFire(false);
-        }
-    }
+		_fireManager = FindObjectOfType<FireManager>();
+	}
+
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.TryGetComponent<PlayerStatus>(out PlayerStatus playerStatus))
+		{
+			playerStatus.SetNearFire(true, _fireManager);
+		}
+	}
+
+	private void OnTriggerExit(Collider other)
+	{
+		if (other.TryGetComponent<PlayerStatus>(out PlayerStatus playerStatus))
+		{
+			playerStatus.SetNearFire(false);
+		}
+	}
 }
