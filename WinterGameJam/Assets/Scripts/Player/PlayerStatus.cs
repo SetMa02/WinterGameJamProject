@@ -50,5 +50,6 @@ public class PlayerStatus : MonoBehaviour
 	public void SetNearFire(bool isNear)
 	{
 		NearFire = isNear;
+		Debug.Log("Near fire");
 	}
 }
