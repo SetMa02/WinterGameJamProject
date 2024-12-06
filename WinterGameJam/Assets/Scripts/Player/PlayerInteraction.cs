@@ -2,49 +2,48 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-	public InventoryManager inventory;
-	public float interactRange = 2f;
-	private FireManager fireManager;
+	public InventoryManager Inventory;
+	[SerializeField] private float _interactionRange = 1.5f;
+	[SerializeField] private FireManager _fireManager;
 
 	void Start()
 	{
-		inventory = GetComponent<InventoryManager>();
+		Inventory = GetComponent<InventoryManager>();
 	}
 
 	void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.E))
 		{
-			InteractWithObjects();
+			TryGiveItemToFire();
 		}
 	}
 
-	void InteractWithObjects()
+	void TryGiveItemToFire()
 	{
+		if (_fireManager == null) return;
+		float distance = Vector2.Distance(this.transform.position, _fireManager.transform.position);
+		if (distance <= _interactionRange)
+		{
+			ItemType selectedItem = Inventory.GetSelectedItem();
+			if (selectedItem != default(ItemType))
+			{
+				if (IsFuelItem(selectedItem))
+				{
+					_fireManager.AddFuel(selectedItem);
+					Inventory.RemoveSelectedItem();
+				}
+				else if (selectedItem == ItemType.Stone)
+				{
+					_fireManager.AddStone();
+					Inventory.RemoveSelectedItem();
+				}
+			}
+		}
 	}
 
-	void TryAddFuelToFire(FireManager fm)
+	bool IsFuelItem(ItemType item)
 	{
-		if (inventory.HasItem(ItemType.Log))
-		{
-			//fm.AddFuel(ItemType.Log);
-			inventory.RemoveItem(ItemType.Log);
-		}
-		else if (inventory.HasItem(ItemType.Board))
-		{
-			//fm.AddFuel(ItemType.Board);
-			inventory.RemoveItem(ItemType.Board);
-		}
-		else if (inventory.HasItem(ItemType.Branch))
-		{
-			//fm.AddFuel(ItemType.Branch);
-			inventory.RemoveItem(ItemType.Branch);
-		}
-		else if (inventory.HasItem(ItemType.Stone))
-		{
-			//fm.AddStone();
-			inventory.RemoveItem(ItemType.Stone);
-		}
+		return (item == ItemType.Branch || item == ItemType.Board || item == ItemType.Log);
 	}
-	// FIXME
 }

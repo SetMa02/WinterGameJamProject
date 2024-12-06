@@ -2,40 +2,53 @@ using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour
 {
-	public float temperature = 100f;
-	public float health = 100f;
-	public float temperatureDecreaseRate = 0.1f;
-	public bool nearFire = false;
+	[SerializeField] private float _temperature = 100f;
+	[SerializeField] private float _health = 100f;
+	[SerializeField] private float _temperatureDecreaseRate = 0.1f;
+	public bool NearFire { get; private set; } = false;
+
+	public float Temperature
+	{
+		get { return _temperature; }
+		set { _temperature = Mathf.Clamp(value, 0f, 100f); }
+	}
+
+	public float Health
+	{
+		get { return _health; }
+		set { _health = Mathf.Clamp(value, 0f, 100f); }
+	}
 
 	public float GetSpeedMultiplier()
 	{
-		if (temperature < 50f)
+		if (_temperature < 50f)
 			return 0.8f;
-		else
-			return 1f;
+		return 1f;
 	}
 
 	void Update()
 	{
-		if (!nearFire)
+		if (!NearFire)
 		{
-			temperature -= temperatureDecreaseRate * Time.deltaTime;
-			if (temperature < 0) temperature = 0;
+			Temperature -= _temperatureDecreaseRate * Time.deltaTime;
 		}
 		else
 		{
-			temperature += 0.5f * Time.deltaTime;
-			if (temperature > 100f) temperature = 100f;
+			Temperature += 0.5f * Time.deltaTime;
 		}
 
-		if (temperature <= 10f)
+		if (Temperature <= 10f)
 		{
-			health -= 0.05f * Time.deltaTime;
-
-			if (health <= 0f)
+			Health -= 0.05f * Time.deltaTime;
+			if (Health <= 0f)
 			{
 				// ААААААА смерт
 			}
 		}
+	}
+
+	public void SetNearFire(bool isNear)
+	{
+		NearFire = isNear;
 	}
 }

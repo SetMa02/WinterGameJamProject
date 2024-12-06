@@ -29,7 +29,7 @@ public class FireManager : MonoBehaviour
         
     }
 
-    public void AddFuel(ItemtType ItemName)
+    public void AddFuel(ItemType ItemName)
     {
         
     }
@@ -39,12 +39,4 @@ public class FireManager : MonoBehaviour
         
     }
 
-    public enum ItemtType
-    {
-        Branch,
-        Board,
-        Log,
-        Stone,
-        Axe
-    }
 }

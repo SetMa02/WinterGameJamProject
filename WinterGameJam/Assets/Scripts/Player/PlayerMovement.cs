@@ -1,29 +1,24 @@
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
-	public float baseSpeed = 3f;
-	private CharacterController characterController;
-	private PlayerStatus playerStatus;
+	[SerializeField] private float _baseSpeed = 3f;
+	private Rigidbody2D _rb;
+	private PlayerStatus _playerStatus;
 
 	void Start()
 	{
-		characterController = GetComponent<CharacterController>();
-		playerStatus = GetComponent<PlayerStatus>();
+		_rb = GetComponent<Rigidbody2D>();
+		_playerStatus = GetComponent<PlayerStatus>();
 	}
 
 	void Update()
 	{
 		float horizontal = Input.GetAxis("Horizontal");
 		float vertical = Input.GetAxis("Vertical");
-
-		Vector3 direction = new Vector3(horizontal, 0, vertical);
-		direction = Camera.main.transform.TransformDirection(direction);
-		direction.y = 0f;
-
-		float currentSpeed = baseSpeed * playerStatus.GetSpeedMultiplier();
-
-		characterController.Move(direction * currentSpeed * Time.deltaTime);
+		Vector2 direction = new Vector2(horizontal, vertical).normalized;
+		float currentSpeed = _baseSpeed * _playerStatus.GetSpeedMultiplier();
+		_rb.velocity = direction * currentSpeed;
 	}
 }
