@@ -4,12 +4,17 @@ public class PlayerInteraction : MonoBehaviour
 {
 	public InventoryManager Inventory;
 	[SerializeField] private float _interactionRange = 1.5f;
-	[SerializeField] private FireManager _fireManager;
 
+	private PlayerStatus _playerStatus;
 
 	void Start()
 	{
 		Inventory = GetComponent<InventoryManager>();
+		_playerStatus = GetComponent<PlayerStatus>();
+		if (_playerStatus == null)
+		{
+			Debug.LogError("PlayerInteraction требует компонент PlayerStatus на том же объекте.");
+		}
 	}
 
 	void Update()
@@ -22,24 +27,32 @@ public class PlayerInteraction : MonoBehaviour
 
 	void TryGiveItemToFire()
 	{
-		if (_fireManager == null) return;
-		float distance = Vector2.Distance(this.transform.position, _fireManager.transform.position);
-		if (distance <= _interactionRange)
+		if (_playerStatus.NearFire && _playerStatus.CurrentFireManager != null)
 		{
 			ItemType selectedItem = Inventory.GetSelectedItem();
 			if (selectedItem != default(ItemType))
 			{
 				if (IsFuelItem(selectedItem))
 				{
-					_fireManager.AddFuel(selectedItem);
+					_playerStatus.CurrentFireManager.AddFuel(selectedItem);
 					Inventory.RemoveSelectedItem();
+					Debug.Log($"Добавлено топливо: {selectedItem}");
 				}
 				else if (selectedItem == ItemType.Stone)
 				{
-					_fireManager.AddStone();
+					_playerStatus.CurrentFireManager.AddStone();
 					Inventory.RemoveSelectedItem();
+					Debug.Log("Добавлен камень.");
 				}
 			}
+			else
+			{
+				Debug.Log("Нет выбранного предмета для передачи.");
+			}
+		}
+		else
+		{
+			Debug.Log("Вы не рядом с костром.");
 		}
 	}
 

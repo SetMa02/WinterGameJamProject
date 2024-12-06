@@ -9,6 +9,7 @@ public class PlayerStatus : MonoBehaviour
 	private float _currentTemperatureIncreaseRate;
 
 	public bool NearFire { get; private set; } = false;
+	private FireManager _currentFireManager;
 
 	public float Temperature
 	{
@@ -43,15 +44,25 @@ public class PlayerStatus : MonoBehaviour
 			Health -= 0.05f * Time.deltaTime;
 			if (Health <= 0f)
 			{
-				// ААААААА смерт
+				Debug.Log("Игрок погиб!");
 			}
 		}
 	}
 
-	public void SetNearFire(bool isNear)
+	public void SetNearFire(bool isNear, FireManager fireManager = null)
 	{
 		NearFire = isNear;
-		Debug.Log("Near fire");
+		if (isNear && fireManager != null)
+		{
+			_currentFireManager = fireManager;
+			SetTemperatureIncreaseRate(_currentTemperatureIncreaseRate);
+		}
+		else
+		{
+			_currentFireManager = null;
+			SetTemperatureIncreaseRate(_defaultTemperatureIncreaseRate);
+		}
+		Debug.Log("Near fire: " + NearFire + ", FireManager: " + fireManager);
 	}
 
 	public void SetTemperatureIncreaseRate(float newRate)
@@ -65,4 +76,6 @@ public class PlayerStatus : MonoBehaviour
 			return 0.8f;
 		return 1f;
 	}
+
+	public FireManager CurrentFireManager => _currentFireManager;
 }
