@@ -1,8 +1,11 @@
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class InventoryManager : MonoBehaviour
 {
-	[SerializeField] private ItemType[] _slots = new ItemType[4];
+	public event UnityAction OnInventoryChanged;
+	public Item[] _slots = new Item[4];
 	private int _selectedSlot = 0;
 
 	void Update()
@@ -13,33 +16,34 @@ public class InventoryManager : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Alpha4)) _selectedSlot = 3;
 	}
 
-	public bool AddItem(ItemType item)
+	public bool AddItem(Item item)
 	{
 		for (int i = 0; i < _slots.Length; i++)
 		{
-			if (_slots[i] == default(ItemType))
+			if (_slots[i] == default(Item))
 			{
 				_slots[i] = item;
+				OnInventoryChanged?.Invoke();
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public bool RemoveItem(ItemType item)
+	public bool RemoveItem(Item item)
 	{
 		for (int i = 0; i < _slots.Length; i++)
 		{
 			if (_slots[i] == item)
 			{
-				_slots[i] = default(ItemType);
+				_slots[i] = null;
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public bool HasItem(ItemType item)
+	public bool HasItem(Item item)
 	{
 		for (int i = 0; i < _slots.Length; i++)
 		{
@@ -49,16 +53,17 @@ public class InventoryManager : MonoBehaviour
 		return false;
 	}
 
-	public ItemType GetSelectedItem()
+	public Item GetSelectedItem()
 	{
 		return _slots[_selectedSlot];
 	}
 
 	public bool RemoveSelectedItem()
 	{
-		if (_slots[_selectedSlot] != default(ItemType))
+		if (_slots[_selectedSlot] != null)
 		{
-			_slots[_selectedSlot] = default(ItemType);
+			_slots[_selectedSlot] = null;
+			OnInventoryChanged?.Invoke();
 			return true;
 		}
 		return false;

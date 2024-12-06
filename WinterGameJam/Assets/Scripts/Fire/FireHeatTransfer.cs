@@ -5,6 +5,7 @@ public class FireHeatTransfer : MonoBehaviour
 {
 	private SphereCollider _sphereCollider;
 	private FireManager _fireManager;
+	private float _heatIncrease;
 
 	private void Start()
 	{
@@ -28,5 +29,10 @@ public class FireHeatTransfer : MonoBehaviour
 		{
 			playerStatus.SetNearFire(false);
 		}
+	}
+
+	public void SetTemperatureIncreaseRate(float heatPerSecond)
+	{
+		_heatIncrease = heatPerSecond;
 	}
 }
