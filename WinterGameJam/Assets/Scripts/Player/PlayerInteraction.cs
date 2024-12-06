@@ -6,6 +6,7 @@ public class PlayerInteraction : MonoBehaviour
 	[SerializeField] private float _interactionRange = 1.5f;
 	[SerializeField] private FireManager _fireManager;
 
+
 	void Start()
 	{
 		Inventory = GetComponent<InventoryManager>();
