@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent( typeof(Animator), typeof(FireHeatBuff))]
+[RequireComponent(typeof(SphereCollider), typeof(Animator), typeof(FireHeatBuff))]
 [RequireComponent(typeof(FireLevel), typeof(FireAnimationManager))]
 public class FireManager : MonoBehaviour
 {
@@ -14,6 +14,7 @@ public class FireManager : MonoBehaviour
     private FireAnimationManager _fireAnimationManager;
     private BoxCollider2D _collider;
     private Animator _animator;
+    private SphereCollider _sphereCollidercollider;
 
     private void Start()
     {
@@ -38,5 +39,7 @@ public class FireManager : MonoBehaviour
     {
         
     }
+    
+    
 
 }
