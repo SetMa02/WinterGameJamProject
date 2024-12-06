@@ -11,7 +11,7 @@ public class ResourceItem : MonoBehaviour
 		{
 			if (player.inventory.AddItem(itemType))
 			{
-				Destroy(gameObject);
+				gameObject.SetActive(false);
 			}
 		}
 	}
