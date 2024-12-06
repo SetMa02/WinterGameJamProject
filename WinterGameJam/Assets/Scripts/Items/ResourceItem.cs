@@ -1,18 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ResourceItem : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	public ItemType itemType;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	private void OnTriggerEnter(Collider other)
+	{
+		PlayerInteraction player = other.GetComponent<PlayerInteraction>();
+		if (player != null)
+		{
+			if (player.inventory.AddItem(itemType))
+			{
+				Destroy(gameObject);
+			}
+		}
+	}
 }
