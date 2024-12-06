@@ -5,6 +5,9 @@ public class PlayerStatus : MonoBehaviour
 	[SerializeField] private float _temperature = 100f;
 	[SerializeField] private float _health = 100f;
 	[SerializeField] private float _temperatureDecreaseRate = 0.1f;
+	[SerializeField] private float _defaultTemperatureIncreaseRate = 0.5f;
+	private float _currentTemperatureIncreaseRate;
+
 	public bool NearFire { get; private set; } = false;
 
 	public float Temperature
@@ -19,11 +22,9 @@ public class PlayerStatus : MonoBehaviour
 		set { _health = Mathf.Clamp(value, 0f, 100f); }
 	}
 
-	public float GetSpeedMultiplier()
+	void Start()
 	{
-		if (_temperature < 50f)
-			return 0.8f;
-		return 1f;
+		_currentTemperatureIncreaseRate = _defaultTemperatureIncreaseRate;
 	}
 
 	void Update()
@@ -34,7 +35,7 @@ public class PlayerStatus : MonoBehaviour
 		}
 		else
 		{
-			Temperature += 0.5f * Time.deltaTime;
+			Temperature += _currentTemperatureIncreaseRate * Time.deltaTime;
 		}
 
 		if (Temperature <= 10f)
@@ -50,5 +51,17 @@ public class PlayerStatus : MonoBehaviour
 	public void SetNearFire(bool isNear)
 	{
 		NearFire = isNear;
+	}
+
+	public void SetTemperatureIncreaseRate(float newRate)
+	{
+		_currentTemperatureIncreaseRate = newRate;
+	}
+
+	public float GetSpeedMultiplier()
+	{
+		if (_temperature < 50f)
+			return 0.8f;
+		return 1f;
 	}
 }
