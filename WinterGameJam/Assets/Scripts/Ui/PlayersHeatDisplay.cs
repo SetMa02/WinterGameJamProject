@@ -12,7 +12,6 @@ public class PlayersHeatDisplay : MonoBehaviour
 
 		if (_freezeDisplay != null && _playerStatus != null)
 		{
-			_freezeDisplay.maxValue = 100f; // Максимальная температура
 			_freezeDisplay.value = _playerStatus.GetPlayersTemperature();
 		}
 		else
