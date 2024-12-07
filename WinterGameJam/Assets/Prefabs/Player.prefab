@@ -70,11 +70,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: fb83368e3e6e3014f84327b0f36c9cba, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.185
+      value: 0.19
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: fb83368e3e6e3014f84327b0f36c9cba, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.472
+      value: -3.96
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: fb83368e3e6e3014f84327b0f36c9cba, type: 3}
       propertyPath: m_LocalRotation.w
@@ -369,9 +369,6 @@ PrefabInstance:
       addedObject: {fileID: 4939751768753504230}
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: fb83368e3e6e3014f84327b0f36c9cba, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 709433911527092482}
-    - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: fb83368e3e6e3014f84327b0f36c9cba, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 7540568347561848776}
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: fb83368e3e6e3014f84327b0f36c9cba, type: 3}
       insertIndex: -1
@@ -382,6 +379,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: fb83368e3e6e3014f84327b0f36c9cba, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7863101608355407262}
+    - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: fb83368e3e6e3014f84327b0f36c9cba, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 515923096107880554}
   m_SourcePrefab: {fileID: 4843985084834002234, guid: fb83368e3e6e3014f84327b0f36c9cba, type: 3}
 --- !u!1 &320989836076410228 stripped
 GameObject:
@@ -413,7 +413,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!65 &4981089883536554912
 BoxCollider:
@@ -434,8 +434,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 15.55609, y: 22.549854, z: 0.20000008}
-  m_Center: {x: 0.107204065, y: -0.5706097, z: 2.7377846e-15}
+  m_Size: {x: 15.791649, y: 25.51237, z: 0.20000008}
+  m_Center: {x: -0.010576099, y: 14.227421, z: -8.115962e-14}
 --- !u!114 &4939751768753504230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -453,20 +453,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
---- !u!114 &709433911527092482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 320989836076410228}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f015204861b1c624c90800b8e07f52b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Inventory: {fileID: 0}
-  _interactionRange: 1.5
 --- !u!114 &7540568347561848776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -494,10 +480,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 340177e6a73a25b458f029413653dbaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _temperature: 100
-  _health: 100
+  _maxTemperature: 100
+  _currentTemperature: 0
   _temperatureDecreaseRate: 0.1
-  _defaultTemperatureIncreaseRate: 0.5
+  _temperatureIncreaseRate: 2
 --- !u!95 &2950882383110610205
 Animator:
   serializedVersion: 5
@@ -533,6 +519,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 0}
   _animationDelay: 0.2
+  _fastForwardSpeed: 100
+  _sidePlayer: {fileID: 0}
+  _frontPlayer: {fileID: 0}
+  _backPlayer: {fileID: 0}
+--- !u!114 &515923096107880554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 320989836076410228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f015204861b1c624c90800b8e07f52b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Inventory: {fileID: 0}
+  _interactionRange: 1.5
 --- !u!4 &1494204807006862615 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -7552582706839291426, guid: fb83368e3e6e3014f84327b0f36c9cba, type: 3}

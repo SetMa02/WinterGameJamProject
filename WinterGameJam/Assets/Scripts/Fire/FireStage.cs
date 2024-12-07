@@ -7,5 +7,5 @@ public class FireStage : ScriptableObject
 	public float Radius;
 	public float HeatPerSecond;
 	public float FireSize;
-	[FormerlySerializedAs("MaxFierHeat")] public float MaxFireHeat;
+	public float MaxFireHeat;
 }

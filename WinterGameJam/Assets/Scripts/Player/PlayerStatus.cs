@@ -4,29 +4,47 @@ using UnityEngine.Serialization;
 
 public class PlayerStatus : MonoBehaviour
 {
-	[SerializeField] private float _maxTemperatire;
-	[FormerlySerializedAs("_temperature")] [SerializeField] private float _currentTemperature;
-	[SerializeField] private float _health = 100f;
-	[SerializeField] private float _temperatureDecreaseRate = 1f;
-	[SerializeField] private float _defaultTemperatureIncreaseRate = 0.5f;
-	[SerializeField]private FireHeatTransfer _fireHeatTransfer;
-	private float _coldEffectMultiplier = 1f;
-	private float _gainingHeat = 0;
+	[SerializeField] private float _maxTemperature = 100f;
+	[SerializeField] private float _currentTemperature;
+	[SerializeField] private float _temperatureDecreaseRate = 5f;
+	[SerializeField] private float _temperatureIncreaseRate = 5f;
 
-	private bool IsFireNear = false;
-	
-	private FireManager _currentFireManager;
-
+	private bool _isNearFire = false;
+	private float _fireHeatAmount = 1f;
 
 	private void Start()
 	{
-		_maxTemperatire = 100f;
-		_currentTemperature = _maxTemperatire;
+		_currentTemperature = _maxTemperature;
 	}
 
-	void Update()
+	private void FixedUpdate()
 	{
-		_currentTemperature -= Time.deltaTime;
+		if (_isNearFire)
+		{
+			_currentTemperature += _fireHeatAmount * _temperatureIncreaseRate;
+			Debug.Log($"Нагрев у костра. {_fireHeatAmount}, Температура: {_currentTemperature}");
+		}
+		else
+		{
+			_currentTemperature -= _temperatureDecreaseRate;
+			Debug.Log($"Охлаждение вне костра. Температура:");
+		}
+
+		// Ограничение температуры
+		_currentTemperature = Mathf.Clamp(_currentTemperature, 0, _maxTemperature);
+
+		// Проверка на смерть
+		if (_currentTemperature <= 0)
+		{
+			Die();
+		}
+	}
+
+	public void SetFireProximityStatus(bool isNearFire, float heatAmount)
+	{
+		_isNearFire = isNearFire;
+		_fireHeatAmount = heatAmount;
+		Debug.Log($"Статус у костра изменен. Огонь рядом: {_isNearFire}, Количество тепла: {_fireHeatAmount}");
 	}
 
 	public float GetPlayersTemperature()
@@ -34,47 +52,13 @@ public class PlayerStatus : MonoBehaviour
 		return _currentTemperature;
 	}
 
-	public void HeatUp(float _heat, bool fireNear)
-	{
-		_currentTemperature = Mathf.Clamp(_currentTemperature +_heat, 0, 100);
-	}
-	
-	
 	public float GetSpeedMultiplier()
 	{
-		if (_currentTemperature < 50f)
-			return 0.8f;
-		return 1f;
+		return _currentTemperature < 50f ? 0.8f : 1f;
 	}
-
-	public FireManager CurrentFireManager => _currentFireManager;
 
 	private void Die()
 	{
 		Debug.Log("Игрок погиб!");
-	}
-
-	private void ApplyBuffs()
-	{
-		PlayerMovement playerMovement = GetComponent<PlayerMovement>();
-		if (playerMovement != null)
-		{
-			playerMovement.ApplySpeedMultiplier(1.2f);
-		}
-	}
-
-	private void RemoveBuffs()
-	{
-		PlayerMovement playerMovement = GetComponent<PlayerMovement>();
-		if (playerMovement != null)
-		{
-			playerMovement.ApplySpeedMultiplier(1f);
-		}
-	}
-
-	public void IncreaseColdEffect(float multiplier)
-	{
-		_coldEffectMultiplier = multiplier;
-		Debug.Log("Cold effect multiplier set to: " + _coldEffectMultiplier);
 	}
 }

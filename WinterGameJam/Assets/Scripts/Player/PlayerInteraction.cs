@@ -3,23 +3,12 @@ using UnityEngine;
 public class PlayerInteraction : MonoBehaviour
 {
 	public InventoryManager Inventory;
-	[SerializeField] private float _interactionRange = 1.5f;
-
 	private PlayerStatus _playerStatus;
 
 	void Start()
 	{
 		Inventory = GetComponent<InventoryManager>();
 		_playerStatus = GetComponent<PlayerStatus>();
-		if (_playerStatus == null)
-		{
-			Debug.LogError("PlayerInteraction требует компонент PlayerStatus на том же объекте.");
-		}
-	}
-
-	void Update()
-	{
-		// Дополнительная логика при нажатии E, если требуется
 	}
 
 	private void OnCollisionStay(Collision other)
