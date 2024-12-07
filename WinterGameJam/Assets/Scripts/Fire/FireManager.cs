@@ -8,7 +8,7 @@ public class FireManager : MonoBehaviour
 {
 	[SerializeField] private List<FireStage> _fireStages = new List<FireStage>();
 	public FireStage CurrentStage;
-	private SpriteRenderer _sprite;
+	private SpriteRenderer _spriteRenderer;
 
 	public float LostHeatPerSecond = 0.2f;
 
@@ -23,6 +23,8 @@ public class FireManager : MonoBehaviour
 
 	private void Start()
 	{
+		_spriteRenderer = GetComponent<SpriteRenderer>();
+
 		CurrentStage = _fireStages[0];
 
 		_sprite = GetComponent<SpriteRenderer>();
@@ -61,7 +63,6 @@ public class FireManager : MonoBehaviour
 
 	public void AddStone()
 	{
-		
 		if (_currentStageIndex < _fireStages.Count - 1)
 		{
 			_currentStageIndex++;
@@ -80,9 +81,10 @@ public class FireManager : MonoBehaviour
 				transform.localScale.z * CurrentStage.FireSize
 			);
 
+
+			_spriteRenderer.sprite = CurrentStage.LogsSprite;
 			Debug.Log($"Fire level changed. Heat per second: {CurrentStage.HeatPerSecond}");
 		}
-		_sprite.sprite = CurrentStage.LogsSprite;
 	}
 
 	public void SphereStay(PlayerStatus playerStatus)
