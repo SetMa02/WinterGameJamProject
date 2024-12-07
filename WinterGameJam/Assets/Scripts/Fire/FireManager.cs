@@ -20,9 +20,12 @@ public class FireManager : MonoBehaviour
 	public bool IsPlayerNearFire = false;
 	public float FireSize;
 	private int _currentStageIndex;
+	private string _fireLevel = "FireLevel";
+	private Animator _animator;
 
 	private void Start()
 	{
+		_animator = GetComponent<Animator>();
 		_spriteRenderer = GetComponent<SpriteRenderer>();
 
 		CurrentStage = _fireStages[0];
@@ -33,6 +36,8 @@ public class FireManager : MonoBehaviour
 
 		HeatPerSecond = CurrentStage.HeatPerSecond;
 		FireSize = CurrentStage.FireSize;
+		
+		_animator.SetFloat(_fireLevel, _currentStageIndex);
 	}
 
 	private void FixedUpdate()
@@ -54,7 +59,7 @@ public class FireManager : MonoBehaviour
 		CurrentStage = _fireStages[_currentStageIndex];
 
 		if (CurrentStage == null) return;
-
+		
 		IsPlayerNearFire = true;
 		HeatPerSecond = CurrentStage.HeatPerSecond;
 	}
@@ -79,8 +84,7 @@ public class FireManager : MonoBehaviour
 				transform.localScale.z * CurrentStage.FireSize
 			);
 
-
-			_spriteRenderer.sprite = CurrentStage.LogsSprite;
+			_animator.SetFloat(_fireLevel, _currentStageIndex);
 			Debug.Log($"Fire level changed. Heat per second: {CurrentStage.HeatPerSecond}");
 		}
 	}
