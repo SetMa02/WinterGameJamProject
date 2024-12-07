@@ -7,46 +7,54 @@ using UnityEngine.Serialization;
 public class FireManager : MonoBehaviour
 {
 	[SerializeField] private List<FireStage> _fireStages = new List<FireStage>();
-	private FireStage _currentStage;
+	public FireStage CurrentStage;
+
+	public float LostHeatPerSecond = 0.2f;
+
+	public bool IsFireActive = false;
 
 	public float maxHeat;
 	public float currentHeat;
 	public float HeatPerSecond;
+	public bool IsPlayerNearFire = false;
 	public float FireSize;
 	private int _currentStageIndex;
 
 	private void Start()
 	{
-		_currentStage = _fireStages[0];
+		CurrentStage = _fireStages[0];
 
-		maxHeat = _currentStage.MaxFireHeat;
+		maxHeat = CurrentStage.MaxFireHeat;
 		currentHeat = maxHeat;
 
-		_currentStageIndex = _fireStages.IndexOf(_currentStage);
+		_currentStageIndex = _fireStages.IndexOf(CurrentStage);
 
-		HeatPerSecond = _currentStage.HeatPerSecond;
-		FireSize = _currentStage.FireSize;
+		HeatPerSecond = CurrentStage.HeatPerSecond;
+		FireSize = CurrentStage.FireSize;
 	}
 
-	private void Update()
+	private void FixedUpdate()
 	{
-
-		currentHeat -= Time.deltaTime;
+		currentHeat -= LostHeatPerSecond;
 		if (currentHeat <= 0)
 		{
+			IsPlayerNearFire = false;
 			currentHeat = 0;
+			HeatPerSecond = 0;
 		}
-	}
-
-	public void GetCurrentStage()
-	{
-		_currentStage = _fireStages[_currentStageIndex];
 	}
 
 	public void AddHeat(float amount)
 	{
 		currentHeat += amount;
 		currentHeat = Mathf.Clamp(currentHeat, 0f, maxHeat);
+
+		CurrentStage = _fireStages[_currentStageIndex];
+
+		if (CurrentStage == null) return;
+
+		IsPlayerNearFire = true;
+		HeatPerSecond = CurrentStage.HeatPerSecond;
 	}
 
 	public void AddStone()
@@ -54,33 +62,43 @@ public class FireManager : MonoBehaviour
 		if (_currentStageIndex < _fireStages.Count - 1)
 		{
 			_currentStageIndex++;
-			_currentStage = _fireStages[_currentStageIndex];
 
-			if (_currentStage == null) return;
+			CurrentStage = _fireStages[_currentStageIndex];
 
-			maxHeat = _currentStage.MaxFireHeat;
-			HeatPerSecond = _currentStage.HeatPerSecond;
-			FireSize = _currentStage.FireSize;
+			if (CurrentStage == null) return;
+
+			IsPlayerNearFire = true;
+			maxHeat = CurrentStage.MaxFireHeat;
+			HeatPerSecond = CurrentStage.HeatPerSecond;
+			FireSize = CurrentStage.FireSize;
 
 			transform.localScale = new Vector3(
-				transform.localScale.x * _currentStage.FireSize,
-				transform.localScale.y * _currentStage.FireSize,
-				transform.localScale.z * _currentStage.FireSize
+				transform.localScale.x * CurrentStage.FireSize,
+				transform.localScale.y * CurrentStage.FireSize,
+				transform.localScale.z * CurrentStage.FireSize
 			);
 
-			Debug.Log($"Fire level changed. Heat per second: {_currentStage.HeatPerSecond}");
+			Debug.Log($"Fire level changed. Heat per second: {CurrentStage.HeatPerSecond}");
 		}
+	}
+
+	public void SphereStay(PlayerStatus playerStatus)
+	{
+		playerStatus.SetFireProximityStatus(IsPlayerNearFire, HeatPerSecond);
+		Debug.Log($"Игрок вошел в зону костра {HeatPerSecond}");
 	}
 
 	public void SphereEnter(PlayerStatus playerStatus)
 	{
-		playerStatus.SetFireProximityStatus(true, HeatPerSecond);
+		IsPlayerNearFire = true;
+		playerStatus.SetFireProximityStatus(IsPlayerNearFire, HeatPerSecond);
 		Debug.Log($"Игрок вошел в зону костра {HeatPerSecond}");
 	}
 
 	public void SphereExit(PlayerStatus playerStatus)
 	{
-		playerStatus.SetFireProximityStatus(false, 0);
+		IsPlayerNearFire = false;
+		playerStatus.SetFireProximityStatus(IsPlayerNearFire, HeatPerSecond);
 		Debug.Log("Игрок вышел из зоны костра");
 	}
 }

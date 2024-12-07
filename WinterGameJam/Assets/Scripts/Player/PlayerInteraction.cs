@@ -5,7 +5,7 @@ public class PlayerInteraction : MonoBehaviour
 	public InventoryManager Inventory;
 	private PlayerStatus _playerStatus;
 
-	void Start()
+	private void Start()
 	{
 		Inventory = GetComponent<InventoryManager>();
 		_playerStatus = GetComponent<PlayerStatus>();

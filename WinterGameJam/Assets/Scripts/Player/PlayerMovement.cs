@@ -16,13 +16,13 @@ public class PlayerMovement : MonoBehaviour
 
 	private float _speedMultiplier = 1f;
 
-	void Start()
+	private void Start()
 	{
 		_rb = GetComponent<Rigidbody>();
 		_playerStatus = GetComponent<PlayerStatus>();
 	}
 
-	void FixedUpdate()
+	private void FixedUpdate()
 	{
 		float horizontal = Input.GetAxis("Horizontal");
 		float vertical = Input.GetAxis("Vertical");
