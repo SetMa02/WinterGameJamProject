@@ -5500,6 +5500,14 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: -0.33027706
       objectReference: {fileID: 0}
+    - target: {fileID: 7540568347561848776, guid: 15a93b6863f6ce048afb32c26b0bff37, type: 3}
+      propertyPath: _leftFootstepPrefab
+      value: 
+      objectReference: {fileID: 1379531000846449007, guid: a8479510e2f86c64cbf0038977a0f35e, type: 3}
+    - target: {fileID: 7540568347561848776, guid: 15a93b6863f6ce048afb32c26b0bff37, type: 3}
+      propertyPath: _rightFootstepPrefab
+      value: 
+      objectReference: {fileID: 1379531000846449007, guid: 0b136371272e84c4d955ff8e48ca5a71, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
