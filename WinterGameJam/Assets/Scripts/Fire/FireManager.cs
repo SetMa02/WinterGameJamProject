@@ -26,7 +26,6 @@ public class FireManager : MonoBehaviour
 		_spriteRenderer = GetComponent<SpriteRenderer>();
 
 		CurrentStage = _fireStages[0];
-		
 		maxHeat = CurrentStage.MaxFireHeat;
 		currentHeat = maxHeat;
 

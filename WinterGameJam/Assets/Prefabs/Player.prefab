@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: -8653719598885068355, guid: fb83368e3e6e3014f84327b0f36c9cba, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: -8421152482239349145, guid: fb83368e3e6e3014f84327b0f36c9cba, type: 3}
       propertyPath: m_BoneTransforms.Array.data[0]
       value: 
@@ -66,7 +70,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: fb83368e3e6e3014f84327b0f36c9cba, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.84
+      value: -3.44
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: fb83368e3e6e3014f84327b0f36c9cba, type: 3}
       propertyPath: m_LocalPosition.y
@@ -74,7 +78,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: fb83368e3e6e3014f84327b0f36c9cba, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.96
+      value: -4.34
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: fb83368e3e6e3014f84327b0f36c9cba, type: 3}
       propertyPath: m_LocalRotation.w
@@ -465,7 +469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e2e7031540f4b04bba5cbdbd760811d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseSpeed: 1.5
+  _baseSpeed: 6
   _acceleration: 10
   _deceleration: 10
 --- !u!114 &3079198599763074747
@@ -536,7 +540,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Inventory: {fileID: 0}
-  _interactionRange: 1.5
 --- !u!4 &1494204807006862615 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -7552582706839291426, guid: fb83368e3e6e3014f84327b0f36c9cba, type: 3}

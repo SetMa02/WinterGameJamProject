@@ -1,18 +1,30 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider))]
 public class HouseController : MonoBehaviour
 {
-    [SerializeField] private GameObject _roof;
-    [SerializeField] private GameObject _frontWall;
-    [SerializeField] private GameObject _door;
-    [SerializeField] private GameObject _flue;
-    private BoxCollider _boxCollider;
+	[SerializeField] private List<GameObject> _houseWalls = new List<GameObject>();
 
-    private void Start()
-    {
-        
-    }
+	private void OnTriggerStay(Collider other)
+	{
+		if (other.TryGetComponent<PlayerStatus>(out _))
+		{
+			foreach (var wall in _houseWalls)
+			{
+				wall.SetActive(false);
+			}
+		}
+	}
+
+	private void OnTriggerExit(Collider other)
+	{
+		if (other.TryGetComponent<PlayerStatus>(out _))
+		{
+			foreach (var wall in _houseWalls)
+			{
+				wall.SetActive(true);
+			}
+		}
+	}
 }
