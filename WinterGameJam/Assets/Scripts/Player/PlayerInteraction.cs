@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
@@ -21,17 +22,31 @@ public class PlayerInteraction : MonoBehaviour
 	{
 		if (Input.GetKeyDown(KeyCode.E))
 		{
-			TryGiveItemToFire();
+			//TryGiveItemToFire();
 		}
 	}
 
+	private void OnCollisionStay(Collision other)
+	{
+		if(other.gameObject.TryGetComponent(out FireManager manager))
+		{
+			if (Input.GetKeyDown(KeyCode.E) && Inventory.GetSelectedItem().IsFuel)
+			{
+				manager.AddFuel(Inventory.GetSelectedItem());
+				Inventory.RemoveSelectedItem();
+			}
+		}
+	}
+
+	/*
 	void TryGiveItemToFire()
 	{
 		if (_playerStatus.NearFire && _playerStatus.CurrentFireManager != null)
 		{
-			ItemType selectedItem = Inventory.GetSelectedItem();
-			if (selectedItem != default(ItemType))
+			Item selectedItem = Inventory.GetSelectedItem();
+			if (selectedItem != null)
 			{
+				
 				if (IsFuelItem(selectedItem))
 				{
 					_playerStatus.CurrentFireManager.AddFuel(selectedItem);
@@ -55,9 +70,12 @@ public class PlayerInteraction : MonoBehaviour
 			Debug.Log("Вы не рядом с костром.");
 		}
 	}
+	*/
 
-	bool IsFuelItem(ItemType item)
+	/*
+	bool IsFuelItem(Item item)
 	{
 		return (item == ItemType.Branch || item == ItemType.Board || item == ItemType.Log);
 	}
+	*/
 }
