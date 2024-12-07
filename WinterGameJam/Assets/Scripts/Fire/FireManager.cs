@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider), typeof(Animator), typeof(FireHeatBuff))]
@@ -13,6 +14,9 @@ public class FireManager : MonoBehaviour
     private FireAnimationManager _fireAnimationManager;
     private BoxCollider2D _boxCollider;
     private Animator _animator;
+    private List<FireStage> _fireStages = new List<FireStage>();
+    private FireStage _currentStage;
+
 
     private void Start()
     {
@@ -22,6 +26,10 @@ public class FireManager : MonoBehaviour
         _fireAnimationManager = GetComponent<FireAnimationManager>();
         _animator = GetComponent<Animator>();
         _boxCollider = GetComponent<BoxCollider2D>();
+        
+        _currentStage = _fireStages[0];
+        
+        _fireLevel.FireLevelUp(_currentStage);
     }
 
     private void Update()

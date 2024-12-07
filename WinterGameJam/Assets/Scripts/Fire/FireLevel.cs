@@ -8,23 +8,18 @@ public class FireLevel : MonoBehaviour
     public float HeatPerSecond;
     public float FireSize;
     private FireHeatTransfer _fireHeatTransfer;
-
     private void Start()
     {
         _fireHeatTransfer = GetComponentInChildren<FireHeatTransfer>();
-        HeatPerSecond = 1f;
         _fireHeatTransfer.SetTemperatureIncreaseRate(HeatPerSecond);
     }
 
-    public void FireLevelUp(float newHeatPerSecond, float newFireSize)
+    public void FireLevelUp(FireStage level)
     {
-        HeatPerSecond = newHeatPerSecond;
-        FireSize = newFireSize;
+        HeatPerSecond = level.HetPerSecond;
+        transform.localScale = new Vector3(transform.localScale.x * level.FireSize, transform.localScale.y * 
+            level.FireSize, transform.localScale.z * level.FireSize);
+        
         _fireHeatTransfer.SetTemperatureIncreaseRate(HeatPerSecond);
-    }
-
-    public void UpdateSpriteSize(SpriteRenderer spriteRenderer)
-    {
-        spriteRenderer.size = new Vector2(FireSize, FireSize);
     }
 }
