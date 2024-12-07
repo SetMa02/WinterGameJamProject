@@ -7,6 +7,7 @@ public class PlayerStatus : MonoBehaviour
 	[SerializeField] private float _temperatureDecreaseRate = 0.1f;
 	[SerializeField] private float _defaultTemperatureIncreaseRate = 0.5f;
 	private float _currentTemperatureIncreaseRate;
+	private float _coldEffectMultiplier = 1f;
 
 	public bool NearFire { get; private set; } = false;
 	private FireManager _currentFireManager;
@@ -32,7 +33,7 @@ public class PlayerStatus : MonoBehaviour
 	{
 		if (!NearFire)
 		{
-			Temperature -= _temperatureDecreaseRate * Time.deltaTime;
+			Temperature -= _temperatureDecreaseRate * Time.deltaTime * _coldEffectMultiplier;
 		}
 		else
 		{
@@ -44,15 +45,14 @@ public class PlayerStatus : MonoBehaviour
 			Health -= 0.05f * Time.deltaTime;
 			if (Health <= 0f)
 			{
-				Debug.Log("Игрок погиб!");
+				Die();
 			}
 		}
 	}
 
 	public float GetPlayersTemperature()
 	{
-		float temp = _temperature;
-		return temp;
+		return _temperature;
 	}
 
 	public void SetNearFire(bool isNear, FireManager fireManager = null)
@@ -61,12 +61,14 @@ public class PlayerStatus : MonoBehaviour
 		if (isNear && fireManager != null)
 		{
 			_currentFireManager = fireManager;
-			SetTemperatureIncreaseRate(_currentTemperatureIncreaseRate);
+			SetTemperatureIncreaseRate(fireManager.currentHeat);
+			ApplyBuffs();
 		}
 		else
 		{
 			_currentFireManager = null;
 			SetTemperatureIncreaseRate(_defaultTemperatureIncreaseRate);
+			RemoveBuffs();
 		}
 		Debug.Log("Near fire: " + NearFire + ", FireManager: " + fireManager);
 	}
@@ -84,4 +86,34 @@ public class PlayerStatus : MonoBehaviour
 	}
 
 	public FireManager CurrentFireManager => _currentFireManager;
+
+	private void Die()
+	{
+		Debug.Log("Игрок погиб!");
+		// Логика окончания игры или перезагрузки сцены
+	}
+
+	private void ApplyBuffs()
+	{
+		PlayerMovement playerMovement = GetComponent<PlayerMovement>();
+		if (playerMovement != null)
+		{
+			playerMovement.ApplySpeedMultiplier(1.2f);
+		}
+	}
+
+	private void RemoveBuffs()
+	{
+		PlayerMovement playerMovement = GetComponent<PlayerMovement>();
+		if (playerMovement != null)
+		{
+			playerMovement.ApplySpeedMultiplier(1f);
+		}
+	}
+
+	public void IncreaseColdEffect(float multiplier)
+	{
+		_coldEffectMultiplier = multiplier;
+		Debug.Log("Cold effect multiplier set to: " + _coldEffectMultiplier);
+	}
 }

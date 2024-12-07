@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewFireLevel", menuName = "Level")]
+[CreateAssetMenu(fileName = "NewFireStage", menuName = "FireStage")]
 public class FireStage : ScriptableObject
 {
-    public float Radius;
-    public float HetPerSecond;
-    public float FireSize;
+	public float Radius;
+	public float HeatPerSecond;
+	public float FireSize;
 }

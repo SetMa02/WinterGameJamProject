@@ -37,6 +37,7 @@ public class InventoryManager : MonoBehaviour
 			if (_slots[i] == item)
 			{
 				_slots[i] = null;
+				OnInventoryChanged?.Invoke();
 				return true;
 			}
 		}
