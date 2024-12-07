@@ -30,12 +30,16 @@ public class PlayerMovement : MonoBehaviour
 	private Quaternion[] _rotationSequence;
 	private int _currentFootstepIndex = 0;
 
+	private Transform _footstepsParent;
+
 	private List<GameObject> _leftFootstepPool = new List<GameObject>();
 	private List<GameObject> _rightFootstepPool = new List<GameObject>();
 	private const int POOL_SIZE = 40;
 
 	private void Start()
 	{
+		_footstepsParent = GameObject.Find("Footsteps").transform;
+
 		_rb = GetComponent<Rigidbody>();
 		_playerStatus = GetComponent<PlayerStatus>();
 
@@ -61,13 +65,14 @@ public class PlayerMovement : MonoBehaviour
 
 	private void InitializeFootstepPools()
 	{
+
 		for (int i = 0; i < POOL_SIZE; i++)
 		{
-			GameObject leftFootstep = Instantiate(_leftFootstepPrefab, Vector3.zero, Quaternion.identity);
+			GameObject leftFootstep = Instantiate(_leftFootstepPrefab, Vector3.zero, Quaternion.identity, _footstepsParent);
 			leftFootstep.SetActive(false);
 			_leftFootstepPool.Add(leftFootstep);
 
-			GameObject rightFootstep = Instantiate(_rightFootstepPrefab, Vector3.zero, Quaternion.identity);
+			GameObject rightFootstep = Instantiate(_rightFootstepPrefab, Vector3.zero, Quaternion.identity, _footstepsParent);
 			rightFootstep.SetActive(false);
 			_rightFootstepPool.Add(rightFootstep);
 		}
