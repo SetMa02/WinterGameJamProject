@@ -28,6 +28,16 @@ public class FireManager : MonoBehaviour
 		FireSize = _currentStage.FireSize;
 	}
 
+	private void Update()
+	{
+
+		currentHeat -= Time.deltaTime;
+		if (currentHeat <= 0)
+		{
+			currentHeat = 0;
+		}
+	}
+
 	public void GetCurrentStage()
 	{
 		_currentStage = _fireStages[_currentStageIndex];
