@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-[RequireComponent(typeof(Animator), typeof(FireAnimationManager))]
+[RequireComponent(typeof(Animator), typeof(FireAnimationManager), typeof(SpriteRenderer))]
 public class FireManager : MonoBehaviour
 {
 	[SerializeField] private List<FireStage> _fireStages = new List<FireStage>();
 	public FireStage CurrentStage;
+	private SpriteRenderer _sprite;
 
 	public float LostHeatPerSecond = 0.2f;
 
@@ -59,12 +60,12 @@ public class FireManager : MonoBehaviour
 
 	public void AddStone()
 	{
+		
 		if (_currentStageIndex < _fireStages.Count - 1)
 		{
 			_currentStageIndex++;
 
 			CurrentStage = _fireStages[_currentStageIndex];
-
 			if (CurrentStage == null) return;
 
 			IsPlayerNearFire = true;
@@ -80,6 +81,7 @@ public class FireManager : MonoBehaviour
 
 			Debug.Log($"Fire level changed. Heat per second: {CurrentStage.HeatPerSecond}");
 		}
+		_sprite.sprite = CurrentStage.LogsSprite;
 	}
 
 	public void SphereStay(PlayerStatus playerStatus)

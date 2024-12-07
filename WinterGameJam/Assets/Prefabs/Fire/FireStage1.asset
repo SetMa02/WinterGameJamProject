@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: FireStage1
   m_EditorClassIdentifier: 
   Radius: 10
-  HeatPerSecond: 5
+  HeatPerSecond: 2
   FireSize: 1
   MaxFireHeat: 200
+  LogsSprite: {fileID: 21300000, guid: d07561579b8615442b14a8fb82e70eaf, type: 3}
