@@ -2,26 +2,10 @@ using UnityEngine;
 
 public class FireLevel : MonoBehaviour
 {
+
 	public float HeatPerSecond;
 	public float FireSize;
 	private FireHeatTransfer _fireHeatTransfer;
-
-	private void Awake()
-	{
-		_fireHeatTransfer = GetComponentInChildren<FireHeatTransfer>();
-		if (_fireHeatTransfer == null)
-		{
-			Debug.LogError("FireHeatTransfer component not found in children.");
-		}
-	}
-
-	private void Start()
-	{
-		if (_fireHeatTransfer != null)
-		{
-			_fireHeatTransfer.SetTemperatureIncreaseRate(HeatPerSecond);
-		}
-	}
 
 	public void FireLevelUp(FireStage level)
 	{
@@ -42,7 +26,7 @@ public class FireLevel : MonoBehaviour
 
 		if (_fireHeatTransfer != null)
 		{
-			_fireHeatTransfer.SetTemperatureIncreaseRate(HeatPerSecond);
+			_fireHeatTransfer.SetHeatPerSecond(HeatPerSecond);
 			Debug.Log($"FireLevelUp called. New HeatPerSecond: {HeatPerSecond}, New FireSize: {FireSize}");
 		}
 		else
@@ -51,3 +35,5 @@ public class FireLevel : MonoBehaviour
 		}
 	}
 }
+
+	

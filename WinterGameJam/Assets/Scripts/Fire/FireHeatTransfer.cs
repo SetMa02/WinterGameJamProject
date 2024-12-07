@@ -1,28 +1,26 @@
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(SphereCollider))]
 public class FireHeatTransfer : MonoBehaviour
 {
-	private SphereCollider _sphereCollider;
-	private FireManager _fireManager;
+	[SerializeField]private SphereCollider _sphereCollider;
+	private float _heatPerSecond;
+	private PlayerStatus _playerStatus;
+	[SerializeField]private FireManager _fireManager;
 
-	private void Start()
+	public void SetHeatPerSecond(float heatPerSecond)
 	{
-		_sphereCollider = GetComponent<SphereCollider>();
-		_sphereCollider.isTrigger = true;
-
-		_fireManager = FindObjectOfType<FireManager>();
-		if (_fireManager == null)
-		{
-			Debug.LogError("FireManager not found in the scene.");
-		}
+		_heatPerSecond = heatPerSecond;
+		Debug.Log("setted");
 	}
 
-	private void OnTriggerEnter(Collider other)
+	private void OnTriggerStay(Collider other)
 	{
 		if (other.TryGetComponent<PlayerStatus>(out PlayerStatus playerStatus))
 		{
-			playerStatus.SetNearFire(true, _fireManager);
+			playerStatus.HeatUp(_fireManager.currentHeat, false);
 		}
 	}
 
@@ -30,13 +28,7 @@ public class FireHeatTransfer : MonoBehaviour
 	{
 		if (other.TryGetComponent<PlayerStatus>(out PlayerStatus playerStatus))
 		{
-			playerStatus.SetNearFire(false);
+			playerStatus.HeatUp(0,false);
 		}
-	}
-
-	public void SetTemperatureIncreaseRate(float heatPerSecond)
-	{
-		// Этот метод можно использовать для передачи информации о текущем тепле костра
-		// Например, для изменения скорости увеличения температуры игрока
 	}
 }

@@ -5,77 +5,102 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class AnimationController : MonoBehaviour
 {
-	[SerializeField] private Animator _animator;
-	[SerializeField] private float _animationDelay = 0.2f;
+    [SerializeField] private Animator _animator;
+    [SerializeField] private float _animationDelay = 0.2f;
+    [SerializeField] private float _fastForwardSpeed = 100f; // Ускорение старой анимации
+    [SerializeField] private GameObject _sidePlayer;
+    [SerializeField] private GameObject _frontPlayer;
+    [SerializeField] private GameObject _backPlayer;
+    
+    private readonly string IsUpward = "IsUpward";
+    private readonly string IsInfront = "IsInfront";
+    private readonly string IsSideways = "IsSideways";
+    private readonly string Speed = "Speed";
 
-	private readonly string IsUpward = "IsUpward";
-	private readonly string IsInfront = "IsInfront";
-	private readonly string IsSideways = "IsSideways";
-	private readonly string Speed = "Speed";
+    private Rigidbody _rigidbody;
+    private bool _canSwitch = true;
+    private string _currentAnimationState;
+    private float _speed;
 
-	private Rigidbody _rigidbody;
-	private bool _canSwitch = true;
-	private float _speed;
+    private void Start()
+    {
+        if (_animator == null)
+        {
+            _animator = GetComponent<Animator>();
+        }
 
-	private void Start()
-	{
-		if (_animator == null)
-		{
-			_animator = GetComponent<Animator>();
-		}
+        _rigidbody = GetComponent<Rigidbody>();
+        _currentAnimationState = IsInfront; // Инициализируем базовое состояние
+    }
 
-		_rigidbody = GetComponent<Rigidbody>();
-	}
+    private void Update()
+    {
+        _speed = _rigidbody.velocity.magnitude;
+        _animator.SetFloat(Speed, _speed);
 
-	private void Update()
-	{
-		_speed = _rigidbody.velocity.magnitude;
-		_animator.SetFloat(Speed, _speed);
+        if (_canSwitch)
+        {
+            TrackCurrentState();
+        }
+    }
+    
+    private void TrackCurrentState()
+    {
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            SwitchAnimation(IsUpward);
+        }
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            SwitchAnimation(IsInfront);
+        }
+        else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
+        {
+            SwitchAnimation(IsSideways);
+        }
+    }
 
-		if (_canSwitch)
-		{
-			TrackCurrentState();
-		}
-	}
+    private void SwitchAnimation(string newState)
+    {
+        if (!_canSwitch) return;
 
-	private void TrackCurrentState()
-	{
-		// Обработчик нажатий клавиш для изменения состояний анимации
-		if (Input.GetKeyDown(KeyCode.W))
-		{
-			SwitchAnimation(IsUpward);
-		}
-		else if (Input.GetKeyDown(KeyCode.S))
-		{
-			SwitchAnimation(IsInfront);
-		}
-		else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
-		{
-			SwitchAnimation(IsSideways);
-		}
-	}
+        _canSwitch = false;
 
-	private void SwitchAnimation(string state)
-	{
-		if (!_canSwitch) return;
+        if (_currentAnimationState != null)
+        {
+            StartCoroutine(FinishCurrentAnimation());
+        }
 
-		_canSwitch = false;
-		OffAllStates();
-		_animator.SetBool(state, true);
+        OffAllStates();
+        _animator.SetBool(newState, true);
+        _currentAnimationState = newState;
 
-		StartCoroutine(EnableSwitchAfterDelay());
-	}
+        StartCoroutine(EnableSwitchAfterDelay());
+    }
+    
 
-	private IEnumerator EnableSwitchAfterDelay()
-	{
-		yield return new WaitForSeconds(_animationDelay);
-		_canSwitch = true;
-	}
+    private IEnumerator FinishCurrentAnimation()
+    {
+        // Ускоряем текущую анимацию
+        _animator.speed = _fastForwardSpeed;
 
-	private void OffAllStates()
-	{
-		_animator.SetBool(IsSideways, false);
-		_animator.SetBool(IsInfront, false);
-		_animator.SetBool(IsUpward, false);
-	}
+        // Ждем одного кадра, чтобы анимация завершилась
+        yield return null;
+
+        // Возвращаем скорость анимации к нормальной
+        _animator.speed = 1f;
+    }
+
+    private IEnumerator EnableSwitchAfterDelay()
+    {
+        yield return new WaitForSeconds(_animationDelay);
+        _canSwitch = true;
+    }
+
+    private void OffAllStates()
+    {
+        _animator.SetBool(IsSideways, false);
+        _animator.SetBool(IsInfront, false);
+        _animator.SetBool(IsUpward, false);
+    }
 }
