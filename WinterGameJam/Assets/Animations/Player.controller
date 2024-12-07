@@ -65,7 +65,7 @@ AnimatorStateTransition:
     m_ConditionEvent: Speed
     m_EventTreshold: 0.1
   - m_ConditionMode: 2
-    m_ConditionEvent: IsInfront
+    m_ConditionEvent: IsInFront
     m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: IsUpward
@@ -83,7 +83,7 @@ AnimatorStateTransition:
   m_TransitionOffset: 0
   m_ExitTime: 0.75
   m_HasExitTime: 0
-  m_HasFixedDuration: 1
+  m_HasFixedDuration: 0
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
@@ -208,7 +208,7 @@ AnimatorStateTransition:
     m_ConditionEvent: Speed
     m_EventTreshold: 0.1
   - m_ConditionMode: 2
-    m_ConditionEvent: IsInfront
+    m_ConditionEvent: IsInFront
     m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: IsUpward
@@ -239,7 +239,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: IsInfront
+    m_ConditionEvent: IsInFront
     m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: IsUpward
@@ -304,10 +304,10 @@ AnimatorStateTransition:
     m_ConditionEvent: IsSideways
     m_EventTreshold: 0
   - m_ConditionMode: 2
-    m_ConditionEvent: IsInfront
+    m_ConditionEvent: IsInFront
     m_EventTreshold: 0
   - m_ConditionMode: 2
-    m_ConditionEvent: IsInfront
+    m_ConditionEvent: IsInFront
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5719431628501356561}
@@ -335,7 +335,7 @@ AnimatorStateTransition:
     m_ConditionEvent: IsSideways
     m_EventTreshold: 0
   - m_ConditionMode: 2
-    m_ConditionEvent: IsInfront
+    m_ConditionEvent: IsInFront
     m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: IsUpward
@@ -483,7 +483,7 @@ AnimatorStateTransition:
     m_ConditionEvent: Speed
     m_EventTreshold: 0.1
   - m_ConditionMode: 1
-    m_ConditionEvent: IsInfront
+    m_ConditionEvent: IsInFront
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8656440346127247738}
@@ -539,7 +539,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: IsInfront
+  - m_Name: IsInFront
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -612,7 +612,7 @@ AnimatorStateTransition:
     m_ConditionEvent: Speed
     m_EventTreshold: 0.1
   - m_ConditionMode: 1
-    m_ConditionEvent: IsInfront
+    m_ConditionEvent: IsInFront
     m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: IsUpward
@@ -653,7 +653,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
-  m_ExitTime: 0.75
+  m_ExitTime: 0.7400861
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -670,22 +670,22 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 8656440346127247738}
-    m_Position: {x: 220, y: 110, z: 0}
+    m_Position: {x: -160, y: 310, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6885747493974819271}
-    m_Position: {x: 530, y: 130, z: 0}
+    m_Position: {x: 870, y: 370, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 470475508789057472}
-    m_Position: {x: 520, y: -70, z: 0}
+    m_Position: {x: 1210, y: 250, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3223266886953617251}
-    m_Position: {x: 570, y: 350, z: 0}
+    m_Position: {x: 200, y: 620, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2239113814204773292}
-    m_Position: {x: 920, y: 340, z: 0}
+    m_Position: {x: 1060, y: 610, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5719431628501356561}
-    m_Position: {x: 830, y: 60, z: 0}
+    m_Position: {x: 370, y: 40, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -693,7 +693,7 @@ AnimatorStateMachine:
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
-  m_ExitPosition: {x: 1110, y: 190, z: 0}
+  m_ExitPosition: {x: 1430, y: 200, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 8656440346127247738}
 --- !u!1101 &2093812904308041785
@@ -708,7 +708,7 @@ AnimatorStateTransition:
     m_ConditionEvent: IsSideways
     m_EventTreshold: 0
   - m_ConditionMode: 2
-    m_ConditionEvent: IsInfront
+    m_ConditionEvent: IsInFront
     m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: IsUpward
@@ -745,7 +745,7 @@ AnimatorStateTransition:
     m_ConditionEvent: IsUpward
     m_EventTreshold: 0
   - m_ConditionMode: 2
-    m_ConditionEvent: IsInfront
+    m_ConditionEvent: IsInFront
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2239113814204773292}
@@ -823,7 +823,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: IsInfront
+    m_ConditionEvent: IsInFront
     m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: IsSideways
@@ -919,7 +919,7 @@ AnimatorStateTransition:
     m_ConditionEvent: IsUpward
     m_EventTreshold: 0
   - m_ConditionMode: 2
-    m_ConditionEvent: IsInfront
+    m_ConditionEvent: IsInFront
     m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: IsSideways
@@ -950,7 +950,7 @@ AnimatorStateTransition:
     m_ConditionEvent: Speed
     m_EventTreshold: 0.1
   - m_ConditionMode: 1
-    m_ConditionEvent: IsInfront
+    m_ConditionEvent: IsInFront
     m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: IsSideways
@@ -1034,7 +1034,7 @@ AnimatorStateTransition:
     m_ConditionEvent: Speed
     m_EventTreshold: 0.1
   - m_ConditionMode: 1
-    m_ConditionEvent: IsInfront
+    m_ConditionEvent: IsInFront
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8656440346127247738}

@@ -2,8 +2,8 @@ using UnityEngine;
 
 public enum ItemType
 {
-	Branch,
-	Board,
+	Wood,
+	Stick,
 	Log,
 	Stone,
 	Axe

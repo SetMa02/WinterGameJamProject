@@ -13,7 +13,7 @@ public class AnimationController : MonoBehaviour
 	[SerializeField] private GameObject _backPlayer;
 
 	private readonly string IsUpward = "IsUpward";
-	private readonly string IsInfront = "IsInfront";
+	private readonly string IsInFront = "IsInFront";
 	private readonly string IsSideways = "IsSideways";
 	private readonly string Speed = "Speed";
 
@@ -30,7 +30,7 @@ public class AnimationController : MonoBehaviour
 		}
 
 		_rigidbody = GetComponent<Rigidbody>();
-		_currentAnimationState = IsInfront; // Инициализируем базовое состояние
+		_currentAnimationState = IsInFront;
 	}
 
 	private void Update()
@@ -52,7 +52,7 @@ public class AnimationController : MonoBehaviour
 		}
 		else if (Input.GetKeyDown(KeyCode.S))
 		{
-			SwitchAnimation(IsInfront);
+			SwitchAnimation(IsInFront);
 		}
 		else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
 		{
@@ -100,7 +100,7 @@ public class AnimationController : MonoBehaviour
 	private void OffAllStates()
 	{
 		_animator.SetBool(IsSideways, false);
-		_animator.SetBool(IsInfront, false);
+		_animator.SetBool(IsInFront, false);
 		_animator.SetBool(IsUpward, false);
 	}
 }

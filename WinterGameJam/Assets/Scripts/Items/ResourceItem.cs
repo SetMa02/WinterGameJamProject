@@ -4,7 +4,7 @@ using UnityEngine;
 public class ResourceItem : MonoBehaviour
 {
 	[SerializeField] private Item _item;
-	public ItemType ItemType => _item != null ? _item.itemType : ItemType.Branch;
+	public ItemType ItemType => _item != null ? _item.itemType : ItemType.Wood;
 	private SpriteRenderer _spriteRenderer;
 
 	private void Start()

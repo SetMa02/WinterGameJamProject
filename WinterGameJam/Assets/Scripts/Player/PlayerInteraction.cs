@@ -22,19 +22,23 @@ public class PlayerInteraction : MonoBehaviour
 				{
 					switch (selectedItem.itemType)
 					{
-						case ItemType.Log:
-							manager.AddHeat(selectedItem.burnTimeAmount);
-							manager.AddHeat(selectedItem.heatIncreaseAmount);
-							Inventory.RemoveSelectedItem();
-							Debug.Log("Added burn time: " + selectedItem.burnTimeAmount + " and heat: " + selectedItem.heatIncreaseAmount);
-							break;
 						case ItemType.Stone:
 							manager.AddStone();
 							Inventory.RemoveSelectedItem();
 							Debug.Log("Added stone to increase fire stage.");
 							break;
 						default:
-							Debug.Log("Selected item cannot be used on fire.");
+							if (selectedItem.IsFuel)
+							{
+								Debug.Log("Added burn time: " + selectedItem.burnTimeAmount + " and heat: " + selectedItem.heatIncreaseAmount);
+								manager.AddHeat(selectedItem.burnTimeAmount);
+								manager.AddHeat(selectedItem.heatIncreaseAmount);
+								Inventory.RemoveSelectedItem();
+							}
+							else
+							{
+								Debug.Log("Selected item cannot be used on fire.");
+							}
 							break;
 					}
 				}
