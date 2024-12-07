@@ -8,7 +8,7 @@ public class InventoryManager : MonoBehaviour
 	public Item[] _slots = new Item[4];
 	private int _selectedSlot = 0;
 
-	void Update()
+	private void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.Alpha1)) _selectedSlot = 0;
 		if (Input.GetKeyDown(KeyCode.Alpha2)) _selectedSlot = 1;
