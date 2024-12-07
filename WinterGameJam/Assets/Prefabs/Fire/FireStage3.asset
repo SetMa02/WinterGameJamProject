@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Radius: 30
   HeatPerSecond: 30
-  FireSize: 5
+  FireSize: 2
+  MaxHeat: 200
+  MaxBurnTime: 200
