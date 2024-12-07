@@ -6,4 +6,6 @@ using UnityEngine;
 public class Item : ScriptableObject
 {
     public Sprite icon;
+    public float heatAmount;
+    public bool IsFuel;
 }

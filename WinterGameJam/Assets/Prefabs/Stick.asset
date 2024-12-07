@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: Stick
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 77aa17a34ea67ce47a8e5ded4a75c1d8, type: 3}
+  heatAmount: 15
+  IsFuel: 1

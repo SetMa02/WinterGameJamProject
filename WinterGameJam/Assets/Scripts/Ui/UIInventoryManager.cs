@@ -1,42 +1,31 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UIInventoryManager : MonoBehaviour
 {
-    public Image[] _inventorySlots;
+    [SerializeField] private Image[] _inventorySlots;
     [SerializeField] private InventoryManager _inventoryManager;
     [SerializeField] private Image _selector;
 
     private void Start()
     {
-        // Подписка на событие
-        if (_inventoryManager != null)
-        {
-            _inventoryManager.OnInventoryChanged += UpdateImages;
-            Debug.Log("Subscribed to OnInventoryChanged");
-        }
-        else
+        if (_inventoryManager == null)
         {
             Debug.LogError("InventoryManager is not assigned!");
+            return;
         }
-        
-        //_inventorySlots = GetComponentsInChildren<Image>();
+
+        _inventoryManager.OnInventoryChanged += UpdateImages;
+        Debug.Log("Subscribed to OnInventoryChanged");
+
+        // Инициализация ячеек инвентаря при старте
+        UpdateImages();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            _selector.transform.position = new Vector3(_inventorySlots[0].transform.position.x, _selector.transform.position.y, _selector.transform.position.z);
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-            _selector.transform.position = new Vector3(_inventorySlots[1].transform.position.x, _selector.transform.position.y, _selector.transform.position.z);
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-            _selector.transform.position = new Vector3(_inventorySlots[2].transform.position.x, _selector.transform.position.y, _selector.transform.position.z);
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-            _selector.transform.position = new Vector3(_inventorySlots[3].transform.position.x, _selector.transform.position.y, _selector.transform.position.z);
-
+        HandleSelectorMovement();
     }
 
     private void OnDestroy()
@@ -49,17 +38,38 @@ public class UIInventoryManager : MonoBehaviour
 
     private void UpdateImages()
     {
-        Debug.Log("Inventory updated");
-        foreach (var item in _inventoryManager._slots)
+        Debug.Log("Updating inventory UI");
+
+        for (int i = 0; i < _inventorySlots.Length; i++)
         {
-            if (item != null)
+            if (i < _inventoryManager._slots.Length && _inventoryManager._slots[i] != null)
             {
-                int index = Array.IndexOf(_inventoryManager._slots, item);
-                if (index >= 0 && index < _inventorySlots.Length)
-                {
-                    _inventorySlots[index].sprite = item.icon;
-                    Debug.Log("Updated slot " + index);
-                }
+                _inventorySlots[i].sprite = _inventoryManager._slots[i].icon;
+                _inventorySlots[i].enabled = true; // Включить отображение спрайта
+                Debug.Log($"Updated slot {i}");
+            }
+            else
+            {
+                _inventorySlots[i].sprite = null;
+                _inventorySlots[i].enabled = false; // Скрыть слот, если он пустой
+                Debug.Log($"Cleared slot {i}");
+            }
+        }
+    }
+    
+    private void HandleSelectorMovement()
+    {
+        for (int i = 0; i < _inventorySlots.Length; i++)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1 + i))
+            {
+                _selector.transform.position = new Vector3(
+                    _inventorySlots[i].transform.position.x,
+                    _selector.transform.position.y,
+                    _selector.transform.position.z
+                );
+                Debug.Log($"Selector moved to slot {i}");
+                break;
             }
         }
     }

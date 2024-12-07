@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
@@ -22,6 +23,18 @@ public class PlayerInteraction : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.E))
 		{
 			//TryGiveItemToFire();
+		}
+	}
+
+	private void OnCollisionStay(Collision other)
+	{
+		if(other.gameObject.TryGetComponent(out FireManager manager))
+		{
+			if (Input.GetKeyDown(KeyCode.E) && Inventory.GetSelectedItem().IsFuel)
+			{
+				manager.AddFuel(Inventory.GetSelectedItem());
+				Inventory.RemoveSelectedItem();
+			}
 		}
 	}
 
