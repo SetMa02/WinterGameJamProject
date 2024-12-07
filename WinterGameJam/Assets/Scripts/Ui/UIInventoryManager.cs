@@ -8,7 +8,7 @@ public class UIInventoryManager : MonoBehaviour
 {
     public Image[] _inventorySlots;
     [SerializeField] private InventoryManager _inventoryManager;
-    [SerializeField] private Dictionary<Image, string> _itemsImages;
+    [SerializeField] private Image _selector;
 
     private void Start()
     {
@@ -24,6 +24,19 @@ public class UIInventoryManager : MonoBehaviour
         }
         
         //_inventorySlots = GetComponentsInChildren<Image>();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            _selector.transform.position = new Vector3(_inventorySlots[0].transform.position.x, _selector.transform.position.y, _selector.transform.position.z);
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            _selector.transform.position = new Vector3(_inventorySlots[1].transform.position.x, _selector.transform.position.y, _selector.transform.position.z);
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            _selector.transform.position = new Vector3(_inventorySlots[2].transform.position.x, _selector.transform.position.y, _selector.transform.position.z);
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+            _selector.transform.position = new Vector3(_inventorySlots[3].transform.position.x, _selector.transform.position.y, _selector.transform.position.z);
+
     }
 
     private void OnDestroy()
