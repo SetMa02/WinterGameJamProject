@@ -2268,6 +2268,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4e774753d65d9e340a0981ca1db74f51, type: 2}
   - {fileID: 11400000, guid: acfdcc2246594db4c964c0170f2baf2d, type: 2}
   - {fileID: 11400000, guid: 66a6bd16c801bd14cb4c8b05e86549f0, type: 2}
+  maxBurnTime: 300
+  fireParticleSystem: {fileID: 0}
+  fireLight: {fileID: 0}
 --- !u!114 &2130117344
 MonoBehaviour:
   m_ObjectHideFlags: 0

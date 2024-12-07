@@ -13,3 +13,7 @@ MonoBehaviour:
   m_Name: Axe
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
+  burnTimeAmount: 0
+  heatIncreaseAmount: 0
+  IsFuel: 0
+  itemType: 4

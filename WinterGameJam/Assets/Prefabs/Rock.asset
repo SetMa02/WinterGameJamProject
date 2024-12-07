@@ -13,3 +13,7 @@ MonoBehaviour:
   m_Name: Rock
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: ceae84747b0b26142a5dd55b3e2a19a8, type: 3}
+  burnTimeAmount: 0
+  heatIncreaseAmount: 0
+  IsFuel: 0
+  itemType: 3

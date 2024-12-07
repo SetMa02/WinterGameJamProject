@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: Log
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 4c05d15a0da934f40afd99349e046376, type: 3}
-  heatAmount: 30
+  burnTimeAmount: 30
+  heatIncreaseAmount: 30
   IsFuel: 1
+  itemType: 2
