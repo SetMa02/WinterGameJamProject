@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Level1
   m_EditorClassIdentifier: 
   Radius: 10
-  HeatPerSecond: 10
+  HeatPerSecond: 1000
   FireSize: 1
-  MaxHeat: 100
-  MaxBurnTime: 100
+  MaxFireHeat: 200

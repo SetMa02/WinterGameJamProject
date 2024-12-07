@@ -34,7 +34,7 @@ public class PlayerInteraction : MonoBehaviour
 					switch (selectedItem.itemType)
 					{
 						case ItemType.Log:
-							manager.AddBurnTime(selectedItem.burnTimeAmount);
+							manager.AddHeat(selectedItem.burnTimeAmount);
 							manager.AddHeat(selectedItem.heatIncreaseAmount);
 							Inventory.RemoveSelectedItem();
 							Debug.Log("Added burn time: " + selectedItem.burnTimeAmount + " and heat: " + selectedItem.heatIncreaseAmount);

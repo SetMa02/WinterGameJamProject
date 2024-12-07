@@ -15,5 +15,4 @@ MonoBehaviour:
   Radius: 20
   HeatPerSecond: 20
   FireSize: 1.5
-  MaxHeat: 200
-  MaxBurnTime: 200
+  MaxFireHeat: 150
