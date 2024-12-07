@@ -2556,9 +2556,9 @@ MonoBehaviour:
   maxHeat: 100
   currentHeat: 100
   _fireStages:
-  - {fileID: 11400000, guid: f79731e67dec9ad48a313f4441c2bfbf, type: 2}
-  - {fileID: 11400000, guid: f8429444ce1542947a4f9e63cab55ab5, type: 2}
-  - {fileID: 11400000, guid: 7e773fea5bb7a3f4597f1b737faa1f60, type: 2}
+  - {fileID: 11400000, guid: 4e774753d65d9e340a0981ca1db74f51, type: 2}
+  - {fileID: 11400000, guid: acfdcc2246594db4c964c0170f2baf2d, type: 2}
+  - {fileID: 11400000, guid: 66a6bd16c801bd14cb4c8b05e86549f0, type: 2}
   maxBurnTime: 300
   fireParticleSystem: {fileID: 0}
   fireLight: {fileID: 0}
