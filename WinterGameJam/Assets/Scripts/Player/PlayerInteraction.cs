@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
@@ -20,62 +19,41 @@ public class PlayerInteraction : MonoBehaviour
 
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.E))
-		{
-			//TryGiveItemToFire();
-		}
+		// Дополнительная логика при нажатии E, если требуется
 	}
 
 	private void OnCollisionStay(Collision other)
 	{
 		if (other.gameObject.TryGetComponent(out FireManager manager))
 		{
-			if (Input.GetKeyDown(KeyCode.E) && Inventory.GetSelectedItem().IsFuel)
+			if (Input.GetKeyDown(KeyCode.E))
 			{
-				manager.AddFuel(Inventory.GetSelectedItem());
-				Inventory.RemoveSelectedItem();
-			}
-		}
-	}
-
-	/*
-	void TryGiveItemToFire()
-	{
-		if (_playerStatus.NearFire && _playerStatus.CurrentFireManager != null)
-		{
-			Item selectedItem = Inventory.GetSelectedItem();
-			if (selectedItem != null)
-			{
-				
-				if (IsFuelItem(selectedItem))
+				Item selectedItem = Inventory.GetSelectedItem();
+				if (selectedItem != null)
 				{
-					_playerStatus.CurrentFireManager.AddFuel(selectedItem);
-					Inventory.RemoveSelectedItem();
-					Debug.Log($"Добавлено топливо: {selectedItem}");
+					switch (selectedItem.itemType)
+					{
+						case ItemType.Log:
+							manager.AddBurnTime(selectedItem.burnTimeAmount);
+							manager.AddHeat(selectedItem.heatIncreaseAmount);
+							Inventory.RemoveSelectedItem();
+							Debug.Log("Added burn time: " + selectedItem.burnTimeAmount + " and heat: " + selectedItem.heatIncreaseAmount);
+							break;
+						case ItemType.Stone:
+							manager.AddStone();
+							Inventory.RemoveSelectedItem();
+							Debug.Log("Added stone to increase fire stage.");
+							break;
+						default:
+							Debug.Log("Selected item cannot be used on fire.");
+							break;
+					}
 				}
-				else if (selectedItem == ItemType.Stone)
+				else
 				{
-					_playerStatus.CurrentFireManager.AddStone();
-					Inventory.RemoveSelectedItem();
-					Debug.Log("Добавлен камень.");
+					Debug.Log("No item selected to add to fire.");
 				}
 			}
-			else
-			{
-				Debug.Log("Нет выбранного предмета для передачи.");
-			}
-		}
-		else
-		{
-			Debug.Log("Вы не рядом с костром.");
 		}
 	}
-	*/
-
-	/*
-	bool IsFuelItem(Item item)
-	{
-		return (item == ItemType.Branch || item == ItemType.Board || item == ItemType.Log);
-	}
-	*/
 }

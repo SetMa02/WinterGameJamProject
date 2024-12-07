@@ -4,16 +4,17 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 	[SerializeField] private float _baseSpeed = 3f;
-	[SerializeField] private float _acceleration = 10f; // Скорость ускорения
-	[SerializeField] private float _deceleration = 10f; // Скорость замедления
+	[SerializeField] private float _acceleration = 10f;
+	[SerializeField] private float _deceleration = 10f;
 	private Rigidbody _rb;
 	private PlayerStatus _playerStatus;
-	private Vector3 _currentVelocity; // Текущая скорость для плавного изменения
-	private bool _facingRight = true; // Флаг направления взгляда
-
+	private Vector3 _currentVelocity;
+	private bool _facingRight = true;
 
 	private Quaternion _rightRotation = Quaternion.Euler(-90, 0, -180);
 	private Quaternion _leftRotation = Quaternion.Euler(90, -180, -180);
+
+	private float _speedMultiplier = 1f;
 
 	void Start()
 	{
@@ -23,13 +24,11 @@ public class PlayerMovement : MonoBehaviour
 
 	void FixedUpdate()
 	{
-
 		float horizontal = Input.GetAxis("Horizontal");
 		float vertical = Input.GetAxis("Vertical");
 		Vector3 targetDirection = new Vector3(horizontal, 0, vertical).normalized;
 
-
-		float currentSpeed = _baseSpeed * _playerStatus.GetSpeedMultiplier();
+		float currentSpeed = _baseSpeed * _playerStatus.GetSpeedMultiplier() * _speedMultiplier;
 		Vector3 targetVelocity = targetDirection * currentSpeed;
 
 		if (targetDirection != Vector3.zero)
@@ -63,5 +62,10 @@ public class PlayerMovement : MonoBehaviour
 	private void RotateCharacter(Quaternion rotation)
 	{
 		transform.rotation = rotation;
+	}
+
+	public void ApplySpeedMultiplier(float multiplier)
+	{
+		_speedMultiplier = multiplier;
 	}
 }

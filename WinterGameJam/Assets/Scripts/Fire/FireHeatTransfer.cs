@@ -5,7 +5,6 @@ public class FireHeatTransfer : MonoBehaviour
 {
 	private SphereCollider _sphereCollider;
 	private FireManager _fireManager;
-	private float _heatIncrease;
 
 	private void Start()
 	{
@@ -13,6 +12,10 @@ public class FireHeatTransfer : MonoBehaviour
 		_sphereCollider.isTrigger = true;
 
 		_fireManager = FindObjectOfType<FireManager>();
+		if (_fireManager == null)
+		{
+			Debug.LogError("FireManager not found in the scene.");
+		}
 	}
 
 	private void OnTriggerEnter(Collider other)
@@ -33,6 +36,7 @@ public class FireHeatTransfer : MonoBehaviour
 
 	public void SetTemperatureIncreaseRate(float heatPerSecond)
 	{
-		_heatIncrease = heatPerSecond;
+		// Этот метод можно использовать для передачи информации о текущем тепле костра
+		// Например, для изменения скорости увеличения температуры игрока
 	}
 }

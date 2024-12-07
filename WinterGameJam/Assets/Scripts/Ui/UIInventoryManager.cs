@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,7 +18,6 @@ public class UIInventoryManager : MonoBehaviour
 		_inventoryManager.OnInventoryChanged += UpdateImages;
 		Debug.Log("Subscribed to OnInventoryChanged");
 
-		// Инициализация ячеек инвентаря при старте
 		UpdateImages();
 	}
 
@@ -45,13 +43,13 @@ public class UIInventoryManager : MonoBehaviour
 			if (i < _inventoryManager._slots.Length && _inventoryManager._slots[i] != null)
 			{
 				_inventorySlots[i].sprite = _inventoryManager._slots[i].icon;
-				_inventorySlots[i].enabled = true; // Включить отображение спрайта
+				_inventorySlots[i].enabled = true;
 				Debug.Log($"Updated slot {i}");
 			}
 			else
 			{
 				_inventorySlots[i].sprite = null;
-				_inventorySlots[i].enabled = false; // Скрыть слот, если он пустой
+				_inventorySlots[i].enabled = false;
 				Debug.Log($"Cleared slot {i}");
 			}
 		}
