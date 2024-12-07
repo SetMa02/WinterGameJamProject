@@ -49,6 +49,12 @@ public class PlayerStatus : MonoBehaviour
 		}
 	}
 
+	public float GetPlayersTemperature()
+	{
+		float temp = _temperature;
+		return temp;
+	}
+
 	public void SetNearFire(bool isNear, FireManager fireManager = null)
 	{
 		NearFire = isNear;
