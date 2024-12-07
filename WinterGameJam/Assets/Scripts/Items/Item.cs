@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewItem", menuName = "Item")]
 public class Item : ScriptableObject
 {
-    public Sprite icon;
-    public float heatAmount;
-    public bool IsFuel;
+	public Sprite icon;
+	public float heatAmount;
+	public bool IsFuel;
 }

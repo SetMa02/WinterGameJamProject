@@ -61,7 +61,7 @@ public class PlayerStatus : MonoBehaviour
 		if (isNear && fireManager != null)
 		{
 			_currentFireManager = fireManager;
-			SetTemperatureIncreaseRate(_currentTemperatureIncreaseRate);
+			SetTemperatureIncreaseRate(fireManager.currentHeat);
 		}
 		else
 		{

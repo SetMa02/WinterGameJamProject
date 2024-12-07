@@ -1,23 +1,31 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FireLEvelIndicator : MonoBehaviour
+public class FireLevelIndicator : MonoBehaviour
 {
-    [SerializeField] private FireManager _fireManager;
-    private Slider _slider;
+	[SerializeField] private FireManager _fireManager;
+	private Slider _slider;
 
-    private void Start()
-    {
-        _slider = GetComponentInChildren<Slider>();
+	private void Start()
+	{
+		_slider = GetComponentInChildren<Slider>();
 
-        _slider.maxValue = _fireManager.maxHeat;
-    }
+		if (_fireManager != null)
+		{
+			_slider.maxValue = _fireManager.maxHeat;
+		}
+		else
+		{
+			Debug.LogError("FireManager is not assigned in FireLevelIndicator.");
+		}
+	}
 
-    private void Update()
-    {
-        _slider.value = _fireManager.currentHeat;
-    }
+	private void Update()
+	{
+		if (_fireManager != null)
+		{
+			_slider.value = _fireManager.currentHeat;
+		}
+	}
 }

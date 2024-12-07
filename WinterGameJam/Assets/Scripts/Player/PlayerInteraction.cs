@@ -28,7 +28,7 @@ public class PlayerInteraction : MonoBehaviour
 
 	private void OnCollisionStay(Collision other)
 	{
-		if(other.gameObject.TryGetComponent(out FireManager manager))
+		if (other.gameObject.TryGetComponent(out FireManager manager))
 		{
 			if (Input.GetKeyDown(KeyCode.E) && Inventory.GetSelectedItem().IsFuel)
 			{
