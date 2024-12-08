@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Stick
   m_EditorClassIdentifier: 
   sprites:
-  - {fileID: 21300000, guid: 211604de6d946484b9db2c2d3dfbd400, type: 3}
   - {fileID: 21300000, guid: 976ba24dd8abe8a4696d5461bcf1869a, type: 3}
   - {fileID: 21300000, guid: 86f5462b1c20ac24a8b60c367c8d5364, type: 3}
+  - {fileID: 21300000, guid: 211604de6d946484b9db2c2d3dfbd400, type: 3}
   burnTimeAmount: 20
   heatIncreaseAmount: 20
   IsFuel: 1

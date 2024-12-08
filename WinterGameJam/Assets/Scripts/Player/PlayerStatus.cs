@@ -41,8 +41,9 @@ public class PlayerStatus : MonoBehaviour
 		{
 			_currentTemperature -= _temperatureDecreaseRate;
 			Debug.Log($"Охлаждение вне костра. Температура:");
-			UpdateTransparency();
 		}
+
+		UpdateTransparency();
 
 		_currentTemperature = Mathf.Clamp(_currentTemperature, 0, _maxTemperature);
 
