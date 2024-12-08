@@ -5,6 +5,8 @@ using UnityEngine.Events;
 public class InventoryManager : MonoBehaviour
 {
 	public event UnityAction OnInventoryChanged;
+	public event UnityAction OnChopping;
+	
 	public Item[] _slots = new Item[4];
 	private int _selectedSlot = 0;
 
@@ -57,6 +59,11 @@ public class InventoryManager : MonoBehaviour
 	public Item GetSelectedItem()
 	{
 		return _slots[_selectedSlot];
+	}
+
+	public void StartChopping()
+	{
+		OnChopping?.Invoke();
 	}
 
 	public bool RemoveSelectedItem()
