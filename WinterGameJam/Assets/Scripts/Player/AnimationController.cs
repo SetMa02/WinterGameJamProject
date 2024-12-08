@@ -58,7 +58,7 @@ public class AnimationController : MonoBehaviour
 
 	private void PickItemAnimation()
 	{
-		_animator.SetTrigger(PickingTrigger);
+		SwitchAnimation(PickingTrigger);
 	}
 
 	private void TrackCurrentState()

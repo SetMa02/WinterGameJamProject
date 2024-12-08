@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6693857d18bd84ab65141062c66a64, type: 3}
   m_Name: Axe
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  sprites:
+  - {fileID: 21300000, guid: e67b0eb940c777b4e8200a830d41127e, type: 3}
   burnTimeAmount: 0
   heatIncreaseAmount: 0
   IsFuel: 0
