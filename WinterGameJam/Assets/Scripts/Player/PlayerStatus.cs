@@ -10,8 +10,8 @@ public class PlayerStatus : MonoBehaviour
 	[SerializeField] private float _zFogOffset;
 	[SerializeField] private float _maxTemperature = 100f;
 	[SerializeField] private float _currentTemperature;
-	[SerializeField] private float _temperatureDecreaseRate = 5f;
-	[SerializeField] private float _temperatureIncreaseRate = 5f;
+	[SerializeField] private float _temperatureDecreaseRate = 3f;
+	[SerializeField] private float _temperatureIncreaseRate = 4f;
 	[SerializeField] private Image _uiFreezeEffect;
 	private bool _isFrozen = false;
 
