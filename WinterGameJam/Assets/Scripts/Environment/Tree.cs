@@ -8,7 +8,7 @@ using UnityEngine;
 public class Tree : MonoBehaviour
 {
 	private Animator _animator;
-	private Item _axe;
+	public Item _axe;
 	private float _chopTime;
 	private readonly string _chopAnimation = "Chopping";
 	private readonly string _falled = "Falled";
