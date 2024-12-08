@@ -32,6 +32,7 @@ public class ResourceItem : MonoBehaviour
 			{
 				if (player.Inventory.AddItem(_item))
 				{
+					SoundManager.Instance.PlayPickupSound(gameObject.transform.position);
 					Destroy(this.gameObject);
 					Debug.Log("Item added to inventory: " + _item.name);
 				}
