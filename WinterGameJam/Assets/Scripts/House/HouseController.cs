@@ -10,7 +10,7 @@ public class HouseController : MonoBehaviour
 	{
 		if (other.TryGetComponent<PlayerStatus>(out _))
 		{
-			SoundManager.Instance.PlaySound("ОткрытияДвери", gameObject.transform.position);
+			SoundManager.Instance.PlaySound("ОткрытияДвери", gameObject.transform.position, 2f);
 			foreach (var wall in _houseWalls)
 			{
 				wall.SetActive(false);
@@ -22,7 +22,7 @@ public class HouseController : MonoBehaviour
 	{
 		if (other.TryGetComponent<PlayerStatus>(out _))
 		{
-			SoundManager.Instance.PlaySound("ЗакрытияДвери", gameObject.transform.position);
+			SoundManager.Instance.PlaySound("ЗакрытияДвери", gameObject.transform.position, 2f);
 			foreach (var wall in _houseWalls)
 			{
 				wall.SetActive(true);

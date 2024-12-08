@@ -75,7 +75,7 @@ public class SoundManager : MonoBehaviour
 		return newSource;
 	}
 
-	public void PlaySound(string clipName, Vector3 position)
+	public void PlaySound(string clipName, Vector3 position, float volume = 1.0f)
 	{
 		if (audioClips.ContainsKey(clipName))
 		{
@@ -83,6 +83,7 @@ public class SoundManager : MonoBehaviour
 			AudioSource source = GetAvailableAudioSource();
 			source.transform.position = position;
 			source.clip = clip;
+			source.volume = volume;
 			source.Play();
 		}
 		else
@@ -91,24 +92,25 @@ public class SoundManager : MonoBehaviour
 		}
 	}
 
-	public void PlayPickupSound(Vector3 position)
+	public void PlayPickupSound(Vector3 position, float volume = 1.0f)
 	{
 		string[] pickupSounds = { "ПоднятияПредмета1", "ПоднятияПредмета2" };
 		int randomIndex = Random.Range(0, pickupSounds.Length);
-		PlaySound(pickupSounds[randomIndex], position);
-	}
-	public void PlayFootstepSound(Vector3 position)
-	{
-		string[] pickupSounds = { "Step1", "Step2", "Step3", "Step4", "Step5", };
-		int randomIndex = Random.Range(0, pickupSounds.Length);
-		PlaySound(pickupSounds[randomIndex], position);
+		PlaySound(pickupSounds[randomIndex], position, volume);
 	}
 
-	public void PlayFootstep(string clipName, Vector3 position)
+	public void PlayFootstepSound(Vector3 position, float volume = 1.0f)
+	{
+		string[] footstepSounds = { "Step1", "Step2", "Step3", "Step4", "Step5" };
+		int randomIndex = Random.Range(0, footstepSounds.Length);
+		PlaySound(footstepSounds[randomIndex], position, volume);
+	}
+
+	public void PlayFootstep(string clipName, Vector3 position, float volume = 1.0f)
 	{
 		if (audioClips.ContainsKey(clipName))
 		{
-			PlaySound(clipName, position);
+			PlaySound(clipName, position, volume);
 		}
 		else
 		{
@@ -116,11 +118,11 @@ public class SoundManager : MonoBehaviour
 		}
 	}
 
-	public void PlayLongFootstep(string clipName, Vector3 position)
+	public void PlayLongFootstep(string clipName, Vector3 position, float volume = 1.0f)
 	{
 		if (audioClips.ContainsKey(clipName))
 		{
-			PlaySound(clipName, position);
+			PlaySound(clipName, position, volume);
 		}
 		else
 		{
@@ -128,4 +130,3 @@ public class SoundManager : MonoBehaviour
 		}
 	}
 }
-
