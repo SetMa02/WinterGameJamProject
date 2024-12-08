@@ -14,6 +14,7 @@ public class AnimationController : MonoBehaviour
 	[SerializeField] private GameObject _sidePlayer;
 	[SerializeField] private GameObject _frontPlayer;
 	[SerializeField] private GameObject _backPlayer;
+	[SerializeField] private Item _axe;
 
 	private readonly string IsUpward = "IsUpward";
 	private readonly string IsInFront = "IsInFront";
@@ -33,6 +34,7 @@ public class AnimationController : MonoBehaviour
 	private void Start()
 	{
 		_inventoryManager = GetComponent<InventoryManager>();
+		
 		if (_animator == null)
 		{
 			_animator = GetComponent<Animator>();
@@ -62,6 +64,11 @@ public class AnimationController : MonoBehaviour
 		}
 	}
 
+	private void PlayChopSound()
+	{
+		SoundManager.Instance.PlaySound("УдарТопором", transform.position, 2f);
+	}
+	
 	private void PickItemAnimation()
 	{
 		SwitchAnimation(PickingTrigger);
@@ -69,10 +76,13 @@ public class AnimationController : MonoBehaviour
 
 	private void ChoppingAnimation()
 	{
-		IsChopping = true;
-		_animator.SetTrigger(StartChoppingTrigger);
-		_animator.SetBool(IsChoppingAnim,true);
-		StartCoroutine(ChoppingDelay());
+		if (_inventoryManager.HasItem(_axe))
+		{
+			IsChopping = true;
+			_animator.SetTrigger(StartChoppingTrigger);
+			_animator.SetBool(IsChoppingAnim,true);
+			StartCoroutine(ChoppingDelay());
+		}
 	}
 
 	private void TrackCurrentState()
