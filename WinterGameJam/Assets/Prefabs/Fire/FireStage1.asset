@@ -15,6 +15,6 @@ MonoBehaviour:
   Radius: 10
   HeatPerSecond: 0.1
   FireSize: 2
-  MaxFireHeat: 1500
+  MaxFireHeat: 500
   LogsSprite: {fileID: 21300000, guid: d07561579b8615442b14a8fb82e70eaf, type: 3}
   LogsDeadSprite: {fileID: 0}

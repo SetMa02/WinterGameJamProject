@@ -7,6 +7,7 @@ using UnityEngine.Serialization;
 public class FireManager : MonoBehaviour
 {
 	[SerializeField] private List<FireStage> _fireStages = new List<FireStage>();
+	[SerializeField] private FireLevelIndicator _levelIndicator;
 	public FireStage CurrentStage;
 	private SpriteRenderer _spriteRenderer;
 
@@ -97,6 +98,9 @@ public class FireManager : MonoBehaviour
 			maxHeat = CurrentStage.MaxFireHeat;
 			HeatPerSecond = CurrentStage.HeatPerSecond;
 			FireSize = CurrentStage.FireSize;
+			
+			_levelIndicator._slider.maxValue = maxHeat;
+			_levelIndicator._slider.value = currentHeat;
 
 			transform.localScale = new Vector3(
 				transform.localScale.x * CurrentStage.FireSize,
