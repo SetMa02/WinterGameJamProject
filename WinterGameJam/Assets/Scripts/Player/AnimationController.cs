@@ -7,6 +7,7 @@ using UnityEngine;
 public class AnimationController : MonoBehaviour
 {
 	public bool IsPicking = false;
+	public bool IsChopping = false;
 	[SerializeField] private Animator _animator;
 	[SerializeField] private float _animationDelay = 0.2f;
 	[SerializeField] private float _fastForwardSpeed = 100f; // Ускорение старой анимации
@@ -20,6 +21,7 @@ public class AnimationController : MonoBehaviour
 	private readonly string Speed = "Speed";
 	private readonly string PickingTrigger = "IsPicking";
 
+	private float chopTime = 3f;
 	private Rigidbody _rigidbody;
 	private bool _canSwitch = true;
 	private string _currentAnimationState;
@@ -38,11 +40,13 @@ public class AnimationController : MonoBehaviour
 		_currentAnimationState = IsInFront;
 
 		_inventoryManager.OnInventoryChanged += PickItemAnimation;
+		_inventoryManager.OnChopping += ChoppingAnimation;
 	}
 
 	private void OnDestroy()
 	{
 		_inventoryManager.OnInventoryChanged -= PickItemAnimation;
+		_inventoryManager.OnChopping -= ChoppingAnimation;
 	}
 
 	private void Update()
@@ -59,6 +63,11 @@ public class AnimationController : MonoBehaviour
 	private void PickItemAnimation()
 	{
 		SwitchAnimation(PickingTrigger);
+	}
+
+	private void ChoppingAnimation()
+	{
+		IsChopping = true;
 	}
 
 	private void TrackCurrentState()
@@ -120,4 +129,6 @@ public class AnimationController : MonoBehaviour
 		_animator.SetBool(IsInFront, false);
 		_animator.SetBool(IsUpward, false);
 	}
+	
+	
 }
