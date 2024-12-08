@@ -83,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		if (!_animationController.IsPicking)
+		if (!_animationController.IsPicking || !_animationController.IsChopping)
 		{
 			float horizontal = Input.GetAxis("Horizontal");
 			float vertical = Input.GetAxis("Vertical");
