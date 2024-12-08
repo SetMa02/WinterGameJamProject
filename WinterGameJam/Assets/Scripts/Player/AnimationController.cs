@@ -34,7 +34,7 @@ public class AnimationController : MonoBehaviour
 	private void Start()
 	{
 		_inventoryManager = GetComponent<InventoryManager>();
-		
+
 		if (_animator == null)
 		{
 			_animator = GetComponent<Animator>();
@@ -68,7 +68,7 @@ public class AnimationController : MonoBehaviour
 	{
 		SoundManager.Instance.PlaySound("УдарТопором", transform.position, 2f);
 	}
-	
+
 	private void PickItemAnimation()
 	{
 		SwitchAnimation(PickingTrigger);
@@ -80,7 +80,7 @@ public class AnimationController : MonoBehaviour
 		{
 			IsChopping = true;
 			_animator.SetTrigger(StartChoppingTrigger);
-			_animator.SetBool(IsChoppingAnim,true);
+			_animator.SetBool(IsChoppingAnim, true);
 			StartCoroutine(ChoppingDelay());
 		}
 	}

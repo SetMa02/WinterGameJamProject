@@ -56,18 +56,18 @@ public class PlayerStatus : MonoBehaviour
 	{
 		// Calculate transparency based on temperature ratio
 		float temperatureRatio = Mathf.Clamp01(_currentTemperature / _maxTemperature);
-        
+
 		// Инвертируем соотношение, чтобы при высокой температуре было меньше прозрачности
 		float transparency = 1f - temperatureRatio;
-        
+
 		// Получаем текущий цвет изображения
 		Color currentColor = _uiFreezeEffect.color;
-        
+
 		// Устанавливаем новый цвет с измененной прозрачностью
 		_uiFreezeEffect.color = new Color(
-			currentColor.r, 
-			currentColor.g, 
-			currentColor.b, 
+			currentColor.r,
+			currentColor.g,
+			currentColor.b,
 			transparency
 		);
 	}
@@ -97,6 +97,5 @@ public class PlayerStatus : MonoBehaviour
 			Debug.Log("Игрок погиб!");
 			_isFrozen = true;
 		}
-		
 	}
 }

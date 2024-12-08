@@ -41,7 +41,7 @@ public class FireManager : MonoBehaviour
 		FireSize = CurrentStage.FireSize;
 
 		_animator.SetFloat(_fireLevel, _currentStageIndex);
-		IsFireActive = true; // Инициализируем костёр как активный
+		IsFireActive = true;
 	}
 
 	private void FixedUpdate()
@@ -59,10 +59,10 @@ public class FireManager : MonoBehaviour
 			{
 				currentHeat = 0;
 				HeatPerSecond = 0;
-				IsFireActive = false; // Обновляем состояние костра
+				IsFireActive = false;
 				_animator.SetBool(_isDead, true);
 				SoundManager.Instance.PlaySound("ПониженияУровня", transform.position);
-				_hasPlayedExtinguishSound = true; // Устанавливаем флаг, чтобы звук не воспроизводился снова
+				_hasPlayedExtinguishSound = true;
 			}
 		}
 	}
@@ -78,10 +78,10 @@ public class FireManager : MonoBehaviour
 
 		IsPlayerNearFire = true;
 		HeatPerSecond = CurrentStage.HeatPerSecond;
-		IsFireActive = true; // Обновляем состояние костра
+		IsFireActive = true;
 
 		_animator.SetBool(_isDead, false);
-		_hasPlayedExtinguishSound = false; // Сбрасываем флаг, чтобы звук мог воспроизвестись при следующем угасании
+		_hasPlayedExtinguishSound = false;
 	}
 
 	public void AddStone()
@@ -107,8 +107,8 @@ public class FireManager : MonoBehaviour
 			_animator.SetFloat(_fireLevel, _currentStageIndex);
 			Debug.Log($"Fire level changed. Heat per second: {CurrentStage.HeatPerSecond}");
 
-			_hasPlayedExtinguishSound = false; // Сбрасываем флаг при изменении стадии
-			IsFireActive = true; // Убеждаемся, что костёр активен после добавления камня
+			_hasPlayedExtinguishSound = false;
+			IsFireActive = true;
 		}
 	}
 
