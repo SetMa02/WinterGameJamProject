@@ -35,6 +35,11 @@ public class Tree : MonoBehaviour
         }
     }
 
+    private void FallSoundPlay()
+    {
+        SoundManager.Instance.PlaySound("ДеревоПадает", transform.position, 2f);
+    }
+
     private void TrunkDissapear()
     {
         _log.transform.SetParent(null);
