@@ -19,7 +19,7 @@ public class Tree : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out InventoryManager inventoryManager))
         {
-            if (inventoryManager.HasItem(_axe) && Input.GetKey(KeyCode.E))
+            if (inventoryManager.HasItem(_axe) && Input.GetKeyUp(KeyCode.E))
             {
                 inventoryManager.StartChopping();
             }

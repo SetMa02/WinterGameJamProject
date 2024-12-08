@@ -20,8 +20,10 @@ public class AnimationController : MonoBehaviour
 	private readonly string IsSideways = "IsSideways";
 	private readonly string Speed = "Speed";
 	private readonly string PickingTrigger = "IsPicking";
+	private readonly string IsChoppingAnim = "IsChopping";
+	private readonly string StartChoppingTrigger = "StartChopping";
 
-	private float chopTime = 3f;
+	private float _chopTime = 3f;
 	private Rigidbody _rigidbody;
 	private bool _canSwitch = true;
 	private string _currentAnimationState;
@@ -68,6 +70,9 @@ public class AnimationController : MonoBehaviour
 	private void ChoppingAnimation()
 	{
 		IsChopping = true;
+		_animator.SetTrigger(StartChoppingTrigger);
+		_animator.SetBool(IsChoppingAnim,true);
+		StartCoroutine(ChoppingDelay());
 	}
 
 	private void TrackCurrentState()
@@ -129,6 +134,12 @@ public class AnimationController : MonoBehaviour
 		_animator.SetBool(IsInFront, false);
 		_animator.SetBool(IsUpward, false);
 	}
-	
-	
+
+	private IEnumerator ChoppingDelay()
+	{
+		yield return new WaitForSeconds(_chopTime);
+		_animator.SetBool(IsChoppingAnim, false);
+		IsChopping = false;
+		yield return null;
+	}
 }
