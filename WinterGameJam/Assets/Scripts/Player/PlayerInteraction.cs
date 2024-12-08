@@ -23,6 +23,7 @@ public class PlayerInteraction : MonoBehaviour
 					switch (selectedItem.itemType)
 					{
 						case ItemType.Stone:
+							SoundManager.Instance.PlaySound("ПовышенияУровня", gameObject.transform.position);
 							manager.AddStone();
 							Inventory.RemoveSelectedItem();
 							Debug.Log("Added stone to increase fire stage.");
