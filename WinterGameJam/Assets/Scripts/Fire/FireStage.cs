@@ -9,4 +9,5 @@ public class FireStage : ScriptableObject
 	public float FireSize;
 	public float MaxFireHeat;
 	public Sprite LogsSprite;
+	public Sprite LogsDeadSprite;
 }

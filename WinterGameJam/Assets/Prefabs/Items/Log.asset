@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6693857d18bd84ab65141062c66a64, type: 3}
   m_Name: Log
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 4c05d15a0da934f40afd99349e046376, type: 3}
+  sprites:
+  - {fileID: 21300000, guid: 0b4f38c97f2878f428a28fd0a1cd7af2, type: 3}
   burnTimeAmount: 30
   heatIncreaseAmount: 30
   IsFuel: 1
