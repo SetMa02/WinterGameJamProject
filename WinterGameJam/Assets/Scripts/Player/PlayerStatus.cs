@@ -23,7 +23,7 @@ public class PlayerStatus : MonoBehaviour
 
 	private void Update()
 	{
-		vfxRenderer.SetVector3("FFOOGG",new Vector3( transform.position.x +5, transform.position.y,
+		vfxRenderer.SetVector3("FFOOGG", new Vector3(transform.position.x + 5, transform.position.y,
 			transform.position.z + _zFogOffset));
 	}
 
@@ -40,15 +40,12 @@ public class PlayerStatus : MonoBehaviour
 			Debug.Log($"Охлаждение вне костра. Температура:");
 		}
 
-		// Ограничение температуры
 		_currentTemperature = Mathf.Clamp(_currentTemperature, 0, _maxTemperature);
 
-		// Проверка на смерть
 		if (_currentTemperature <= 0)
 		{
 			Die();
 		}
-		
 	}
 
 	public void SetFireProximityStatus(bool isNearFire, float heatAmount)
