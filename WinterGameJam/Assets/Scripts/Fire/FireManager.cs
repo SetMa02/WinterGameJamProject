@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -35,6 +36,8 @@ public class FireManager : MonoBehaviour
 		CurrentStage = _fireStages[0];
 		maxHeat = CurrentStage.MaxFireHeat;
 		currentHeat = maxHeat;
+		
+		UpdateSlider();
 
 		_currentStageIndex = _fireStages.IndexOf(CurrentStage);
 
@@ -99,8 +102,7 @@ public class FireManager : MonoBehaviour
 			HeatPerSecond = CurrentStage.HeatPerSecond;
 			FireSize = CurrentStage.FireSize;
 			
-			_levelIndicator._slider.maxValue = maxHeat;
-			_levelIndicator._slider.value = currentHeat;
+			UpdateSlider();
 
 			transform.localScale = new Vector3(
 				transform.localScale.x * CurrentStage.FireSize,
@@ -114,6 +116,12 @@ public class FireManager : MonoBehaviour
 			_hasPlayedExtinguishSound = false;
 			IsFireActive = true;
 		}
+	}
+
+	private void UpdateSlider()
+	{
+		_levelIndicator._slider.maxValue = maxHeat;
+		_levelIndicator._slider.value = currentHeat;
 	}
 
 	public void SphereStay(PlayerStatus playerStatus)
