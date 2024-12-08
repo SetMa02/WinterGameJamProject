@@ -24,6 +24,8 @@ public class FireManager : MonoBehaviour
 	private Animator _animator;
 	private readonly string _isDead = "Isdead";
 
+	private bool _hasPlayedExtinguishSound = false; // Флаг для отслеживания воспроизведения звука
+
 	private void Start()
 	{
 		_animator = GetComponent<Animator>();
@@ -39,17 +41,29 @@ public class FireManager : MonoBehaviour
 		FireSize = CurrentStage.FireSize;
 
 		_animator.SetFloat(_fireLevel, _currentStageIndex);
+		IsFireActive = true; // Инициализируем костёр как активный
 	}
 
 	private void FixedUpdate()
 	{
-		currentHeat -= LostHeatPerSecond;
+		if (IsFireActive)
+		{
+			currentHeat -= LostHeatPerSecond;
+		}
+
 		if (currentHeat <= 0)
 		{
 			IsPlayerNearFire = false;
-			currentHeat = 0;
-			HeatPerSecond = 0;
-			_animator.SetBool(_isDead, true);
+
+			if (!_hasPlayedExtinguishSound)
+			{
+				currentHeat = 0;
+				HeatPerSecond = 0;
+				IsFireActive = false; // Обновляем состояние костра
+				_animator.SetBool(_isDead, true);
+				SoundManager.Instance.PlaySound("ПониженияУровня", transform.position);
+				_hasPlayedExtinguishSound = true; // Устанавливаем флаг, чтобы звук не воспроизводился снова
+			}
 		}
 	}
 
@@ -64,8 +78,10 @@ public class FireManager : MonoBehaviour
 
 		IsPlayerNearFire = true;
 		HeatPerSecond = CurrentStage.HeatPerSecond;
+		IsFireActive = true; // Обновляем состояние костра
 
 		_animator.SetBool(_isDead, false);
+		_hasPlayedExtinguishSound = false; // Сбрасываем флаг, чтобы звук мог воспроизвестись при следующем угасании
 	}
 
 	public void AddStone()
@@ -90,20 +106,23 @@ public class FireManager : MonoBehaviour
 
 			_animator.SetFloat(_fireLevel, _currentStageIndex);
 			Debug.Log($"Fire level changed. Heat per second: {CurrentStage.HeatPerSecond}");
+
+			_hasPlayedExtinguishSound = false; // Сбрасываем флаг при изменении стадии
+			IsFireActive = true; // Убеждаемся, что костёр активен после добавления камня
 		}
 	}
 
 	public void SphereStay(PlayerStatus playerStatus)
 	{
 		playerStatus.SetFireProximityStatus(IsPlayerNearFire, HeatPerSecond);
-		Debug.Log($"Игрок вошел в зону костра {HeatPerSecond}");
+		Debug.Log($"Игрок находится в зоне костра. Тепло: {HeatPerSecond}");
 	}
 
 	public void SphereEnter(PlayerStatus playerStatus)
 	{
 		IsPlayerNearFire = true;
 		playerStatus.SetFireProximityStatus(IsPlayerNearFire, HeatPerSecond);
-		Debug.Log($"Игрок вошел в зону костра {HeatPerSecond}");
+		Debug.Log($"Игрок вошел в зону костра. Тепло: {HeatPerSecond}");
 	}
 
 	public void SphereExit(PlayerStatus playerStatus)

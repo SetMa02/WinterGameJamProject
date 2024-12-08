@@ -23,6 +23,7 @@ public class PlayerInteraction : MonoBehaviour
 					switch (selectedItem.itemType)
 					{
 						case ItemType.Stone:
+							SoundManager.Instance.PlaySound("ПовышенияУровня", gameObject.transform.position);
 							manager.AddStone();
 							Inventory.RemoveSelectedItem();
 							Debug.Log("Added stone to increase fire stage.");
@@ -30,6 +31,7 @@ public class PlayerInteraction : MonoBehaviour
 						default:
 							if (selectedItem.IsFuel)
 							{
+								SoundManager.Instance.PlaySound("ЗажигКостра", gameObject.transform.position);
 								Debug.Log("Added burn time: " + selectedItem.burnTimeAmount + " and heat: " + selectedItem.heatIncreaseAmount);
 								manager.AddHeat(selectedItem.burnTimeAmount);
 								manager.AddHeat(selectedItem.heatIncreaseAmount);

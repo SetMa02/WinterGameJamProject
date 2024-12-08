@@ -145,7 +145,7 @@ public class PlayerMovement : MonoBehaviour
 
 			footstep.SetActive(true);
 
-			SoundManager.Instance.PlayFootstepSound(gameObject.transform.position);
+			SoundManager.Instance.PlayFootstepSound(gameObject.transform.position, 0.5f);
 
 			StartCoroutine(DeactivateFootstepAfterDelay(footstep));
 		}
