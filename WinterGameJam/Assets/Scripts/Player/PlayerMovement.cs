@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
@@ -17,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
 	private PlayerStatus _playerStatus;
 	private Vector3 _currentVelocity;
 	private bool _facingRight = true;
+	private AnimationController _animationController;
 
 	private Quaternion _leftFootBaseRotation = Quaternion.Euler(90, 0, 0);
 	private Quaternion _rightFootBaseRotation = Quaternion.Euler(90, 0, 0);
@@ -38,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private void Start()
 	{
+		_animationController = GetComponent<AnimationController>();
 		_footstepsParent = GameObject.Find("Footsteps").transform;
 
 		_rb = GetComponent<Rigidbody>();
@@ -80,31 +83,34 @@ public class PlayerMovement : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		float horizontal = Input.GetAxis("Horizontal");
-		float vertical = Input.GetAxis("Vertical");
-		Vector3 targetDirection = new Vector3(horizontal, 0, vertical).normalized;
-
-		float currentSpeed = _baseSpeed * _playerStatus.GetSpeedMultiplier() * _speedMultiplier;
-		Vector3 targetVelocity = targetDirection * currentSpeed;
-
-		if (targetDirection != Vector3.zero)
+		if (!_animationController.IsPicking)
 		{
-			_currentVelocity = Vector3.Lerp(_currentVelocity, targetVelocity, _acceleration * Time.fixedDeltaTime);
+			float horizontal = Input.GetAxis("Horizontal");
+			float vertical = Input.GetAxis("Vertical");
+			Vector3 targetDirection = new Vector3(horizontal, 0, vertical).normalized;
 
-			if (Vector3.Distance(transform.position, _lastFootstepPosition) >= _footstepSpawnDistance)
+			float currentSpeed = _baseSpeed * _playerStatus.GetSpeedMultiplier() * _speedMultiplier;
+			Vector3 targetVelocity = targetDirection * currentSpeed;
+
+			if (targetDirection != Vector3.zero)
 			{
-				SpawnRealisticFootsteps(targetDirection);
-				_lastFootstepPosition = transform.position;
+				_currentVelocity = Vector3.Lerp(_currentVelocity, targetVelocity, _acceleration * Time.fixedDeltaTime);
+
+				if (Vector3.Distance(transform.position, _lastFootstepPosition) >= _footstepSpawnDistance)
+				{
+					SpawnRealisticFootsteps(targetDirection);
+					_lastFootstepPosition = transform.position;
+				}
 			}
-		}
-		else
-		{
-			_currentVelocity = Vector3.Lerp(_currentVelocity, Vector3.zero, _deceleration * Time.fixedDeltaTime);
-		}
+			else
+			{
+				_currentVelocity = Vector3.Lerp(_currentVelocity, Vector3.zero, _deceleration * Time.fixedDeltaTime);
+			}
 
-		_rb.velocity = _currentVelocity;
+			_rb.velocity = _currentVelocity;
 
-		HandleRotation(horizontal);
+			HandleRotation(horizontal);
+		}
 	}
 
 	private void SpawnRealisticFootsteps(Vector3 movementDirection)

@@ -1,9 +1,12 @@
 using System;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.VFX;
 
 public class PlayerStatus : MonoBehaviour
 {
+	public VisualEffect vfxRenderer;
+	[SerializeField] private float _zFogOffset;
 	[SerializeField] private float _maxTemperature = 100f;
 	[SerializeField] private float _currentTemperature;
 	[SerializeField] private float _temperatureDecreaseRate = 5f;
@@ -11,10 +14,17 @@ public class PlayerStatus : MonoBehaviour
 
 	private bool _isNearFire = false;
 	private float _fireHeatAmount = 1f;
+	private Vector3 _cleanFogSpot;
 
 	private void Start()
 	{
 		_currentTemperature = _maxTemperature;
+	}
+
+	private void Update()
+	{
+		vfxRenderer.SetVector3("FFOOGG",new Vector3( transform.position.x +5, transform.position.y,
+			transform.position.z + _zFogOffset));
 	}
 
 	private void FixedUpdate()
@@ -38,6 +48,7 @@ public class PlayerStatus : MonoBehaviour
 		{
 			Die();
 		}
+		
 	}
 
 	public void SetFireProximityStatus(bool isNearFire, float heatAmount)
