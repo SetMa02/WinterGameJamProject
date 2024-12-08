@@ -48,7 +48,7 @@ public class SoundManager : MonoBehaviour
 		for (int i = 0; i < poolSize; i++)
 		{
 			GameObject audioObj = new GameObject("PooledAudioSource_" + i);
-			audioObj.transform.parent = this.transform;
+			audioObj.transform.SetParent(transform);
 			AudioSource source = audioObj.AddComponent<AudioSource>();
 			source.playOnAwake = false;
 			source.spatialBlend = 1.0f;
@@ -67,7 +67,7 @@ public class SoundManager : MonoBehaviour
 		}
 
 		GameObject audioObj = new GameObject("PooledAudioSource_Extra");
-		audioObj.transform.parent = this.transform;
+		audioObj.transform.SetParent(transform);
 		AudioSource newSource = audioObj.AddComponent<AudioSource>();
 		newSource.playOnAwake = false;
 		newSource.spatialBlend = 1.0f;
@@ -77,9 +77,8 @@ public class SoundManager : MonoBehaviour
 
 	public void PlaySound(string clipName, Vector3 position, float volume = 1.0f)
 	{
-		if (audioClips.ContainsKey(clipName))
+		if (audioClips.TryGetValue(clipName, out AudioClip clip))
 		{
-			AudioClip clip = audioClips[clipName];
 			AudioSource source = GetAvailableAudioSource();
 			source.transform.position = position;
 			source.clip = clip;
