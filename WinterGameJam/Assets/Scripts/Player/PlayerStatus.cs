@@ -10,8 +10,8 @@ public class PlayerStatus : MonoBehaviour
 	[SerializeField] private float _zFogOffset;
 	[SerializeField] private float _maxTemperature = 100f;
 	[SerializeField] private float _currentTemperature;
-	[SerializeField] private float _temperatureDecreaseRate = 5f;
-	[SerializeField] private float _temperatureIncreaseRate = 5f;
+	[SerializeField] private float _temperatureDecreaseRate = 0.1f;
+	[SerializeField] private float _temperatureIncreaseRate = 0.2f;
 	[SerializeField] private Image _uiFreezeEffect;
 	private bool _isFrozen = false;
 
@@ -41,8 +41,9 @@ public class PlayerStatus : MonoBehaviour
 		{
 			_currentTemperature -= _temperatureDecreaseRate;
 			Debug.Log($"Охлаждение вне костра. Температура:");
-			UpdateTransparency();
 		}
+
+		UpdateTransparency();
 
 		_currentTemperature = Mathf.Clamp(_currentTemperature, 0, _maxTemperature);
 

@@ -14,13 +14,23 @@ public class ResourceItem : MonoBehaviour
 
 		if (_item != null)
 		{
-			_spriteRenderer.sprite = _item.GetSprite();
-			float randomYRotation = UnityEngine.Random.Range(0f, 360f);
-			transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, randomYRotation, transform.rotation.eulerAngles.z);
+			// Не работает ставит пустой спрайт
+			//Sprite newSprite = _item.GetSprite();
+			//if (newSprite != null)
+			//{
+				//_spriteRenderer.sprite = newSprite;
+				float randomYRotation = UnityEngine.Random.Range(0f, 360f);
+				transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, randomYRotation, transform.rotation.eulerAngles.z);
+				//Debug.Log($"Спрайт установлен: {newSprite.name}");
+			//}
+			//else
+			//{
+				//Debug.LogError("GetSprite() вернул null. Проверьте список sprites в объекте Item.");
+			//}
 		}
 		else
 		{
-			Debug.LogError("Item is not assigned in ResourceItem.");
+			Debug.LogError("Item не назначен в ResourceItem.");
 		}
 	}
 
