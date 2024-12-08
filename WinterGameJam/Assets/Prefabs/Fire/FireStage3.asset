@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Radius: 30
   HeatPerSecond: 0.5
-  FireSize: 2.6
+  FireSize: 1.1
   MaxFireHeat: 300
   LogsSprite: {fileID: 21300000, guid: 4de13d8d436d02540ac314b53b90c8fe, type: 3}
   LogsDeadSprite: {fileID: 0}
