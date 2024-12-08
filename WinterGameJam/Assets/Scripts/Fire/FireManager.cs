@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
+[RequireComponent(typeof(ChangeScene))]
 [RequireComponent(typeof(Animator), typeof(FireAnimationManager), typeof(SpriteRenderer))]
 public class FireManager : MonoBehaviour
 {
@@ -25,6 +27,7 @@ public class FireManager : MonoBehaviour
 	private string _fireLevel = "FireLevel";
 	private Animator _animator;
 	private readonly string _isDead = "Isdead";
+	private ChangeScene _sceneManager;
 
 	private bool _hasPlayedExtinguishSound = false; // Флаг для отслеживания воспроизведения звука
 
@@ -46,6 +49,8 @@ public class FireManager : MonoBehaviour
 
 		_animator.SetFloat(_fireLevel, _currentStageIndex);
 		IsFireActive = true;
+		
+		_sceneManager = GetComponent<ChangeScene>();
 	}
 
 	private void FixedUpdate()
@@ -77,7 +82,7 @@ public class FireManager : MonoBehaviour
 		currentHeat = Mathf.Clamp(currentHeat, 0f, maxHeat);
 
 		CurrentStage = _fireStages[_currentStageIndex];
-
+		
 		if (CurrentStage == null) return;
 
 		IsPlayerNearFire = true;
@@ -101,6 +106,15 @@ public class FireManager : MonoBehaviour
 			maxHeat = CurrentStage.MaxFireHeat;
 			HeatPerSecond = CurrentStage.HeatPerSecond;
 			FireSize = CurrentStage.FireSize;
+			
+			if (_currentStageIndex == 2)
+			{
+				_sceneManager.ChangeSceneByName("EndPresentation");
+			}
+			else
+			{
+				SoundManager.Instance.PlaySound("Ггворит2", transform.position, 2f);
+			}
 			
 			UpdateSlider();
 
