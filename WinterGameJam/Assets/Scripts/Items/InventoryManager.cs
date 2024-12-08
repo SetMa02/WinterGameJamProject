@@ -5,9 +5,11 @@ using UnityEngine.Events;
 public class InventoryManager : MonoBehaviour
 {
 	public event UnityAction OnInventoryChanged;
+
 	public event UnityAction OnChopping;
 
 	public Item[] _slots = new Item[4];
+
 	private int _selectedSlot = 0;
 
 	private void Update()
@@ -22,7 +24,7 @@ public class InventoryManager : MonoBehaviour
 	{
 		for (int i = 0; i < _slots.Length; i++)
 		{
-			if (_slots[i] == default(Item))
+			if (_slots[i] == null)
 			{
 				_slots[i] = item;
 				OnInventoryChanged?.Invoke();
@@ -36,7 +38,7 @@ public class InventoryManager : MonoBehaviour
 	{
 		for (int i = 0; i < _slots.Length; i++)
 		{
-			if (_slots[i] == item)
+			if (_slots[i] != null && _slots[i] == item)
 			{
 				_slots[i] = null;
 				OnInventoryChanged?.Invoke();
@@ -48,6 +50,7 @@ public class InventoryManager : MonoBehaviour
 
 	public bool HasItem(Item item)
 	{
+		Debug.Log("Проверка наличия предмета в инвентаре " + item.name);
 		for (int i = 0; i < _slots.Length; i++)
 		{
 			if (_slots[i] == item)
