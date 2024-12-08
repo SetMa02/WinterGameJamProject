@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class FireLevelIndicator : MonoBehaviour
 {
 	[SerializeField] private FireManager _fireManager;
-	private Slider _slider;
+	public Slider _slider;
 
 	private void Start()
 	{
