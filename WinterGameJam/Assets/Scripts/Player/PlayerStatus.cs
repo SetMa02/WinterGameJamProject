@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 using UnityEngine.VFX;
 
 public class PlayerStatus : MonoBehaviour
@@ -11,6 +12,8 @@ public class PlayerStatus : MonoBehaviour
 	[SerializeField] private float _currentTemperature;
 	[SerializeField] private float _temperatureDecreaseRate = 5f;
 	[SerializeField] private float _temperatureIncreaseRate = 5f;
+	[SerializeField] private Image _uiFreezeEffect;
+	private bool _isFrozen = false;
 
 	private bool _isNearFire = false;
 	private float _fireHeatAmount = 1f;
@@ -38,6 +41,7 @@ public class PlayerStatus : MonoBehaviour
 		{
 			_currentTemperature -= _temperatureDecreaseRate;
 			Debug.Log($"Охлаждение вне костра. Температура:");
+			UpdateTransparency();
 		}
 
 		_currentTemperature = Mathf.Clamp(_currentTemperature, 0, _maxTemperature);
@@ -46,6 +50,26 @@ public class PlayerStatus : MonoBehaviour
 		{
 			Die();
 		}
+	}
+
+	public void UpdateTransparency()
+	{
+		// Calculate transparency based on temperature ratio
+		float temperatureRatio = Mathf.Clamp01(_currentTemperature / _maxTemperature);
+        
+		// Инвертируем соотношение, чтобы при высокой температуре было меньше прозрачности
+		float transparency = 1f - temperatureRatio;
+        
+		// Получаем текущий цвет изображения
+		Color currentColor = _uiFreezeEffect.color;
+        
+		// Устанавливаем новый цвет с измененной прозрачностью
+		_uiFreezeEffect.color = new Color(
+			currentColor.r, 
+			currentColor.g, 
+			currentColor.b, 
+			transparency
+		);
 	}
 
 	public void SetFireProximityStatus(bool isNearFire, float heatAmount)
@@ -67,6 +91,12 @@ public class PlayerStatus : MonoBehaviour
 
 	private void Die()
 	{
-		Debug.Log("Игрок погиб!");
+		if (!_isFrozen)
+		{
+			SoundManager.Instance.PlaySound("Замерзания", transform.position, 2f);
+			Debug.Log("Игрок погиб!");
+			_isFrozen = true;
+		}
+		
 	}
 }
