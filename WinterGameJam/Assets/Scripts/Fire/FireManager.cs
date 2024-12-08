@@ -37,7 +37,7 @@ public class FireManager : MonoBehaviour
 
 		HeatPerSecond = CurrentStage.HeatPerSecond;
 		FireSize = CurrentStage.FireSize;
-		
+
 		_animator.SetFloat(_fireLevel, _currentStageIndex);
 	}
 
@@ -61,10 +61,10 @@ public class FireManager : MonoBehaviour
 		CurrentStage = _fireStages[_currentStageIndex];
 
 		if (CurrentStage == null) return;
-		
+
 		IsPlayerNearFire = true;
 		HeatPerSecond = CurrentStage.HeatPerSecond;
-		
+
 		_animator.SetBool(_isDead, false);
 	}
 
