@@ -42,7 +42,7 @@ public class UIInventoryManager : MonoBehaviour
 		{
 			if (i < _inventoryManager._slots.Length && _inventoryManager._slots[i] != null)
 			{
-				_inventorySlots[i].sprite = _inventoryManager._slots[i].icon;
+				_inventorySlots[i].sprite = _inventoryManager._slots[i].GetSprite();
 				_inventorySlots[i].enabled = true;
 				Debug.Log($"Updated slot {i}");
 			}

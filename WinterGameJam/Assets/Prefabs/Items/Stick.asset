@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6693857d18bd84ab65141062c66a64, type: 3}
   m_Name: Stick
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 77aa17a34ea67ce47a8e5ded4a75c1d8, type: 3}
+  sprites:
+  - {fileID: 21300000, guid: 211604de6d946484b9db2c2d3dfbd400, type: 3}
+  - {fileID: 21300000, guid: 976ba24dd8abe8a4696d5461bcf1869a, type: 3}
+  - {fileID: 21300000, guid: 86f5462b1c20ac24a8b60c367c8d5364, type: 3}
   burnTimeAmount: 20
   heatIncreaseAmount: 20
   IsFuel: 1

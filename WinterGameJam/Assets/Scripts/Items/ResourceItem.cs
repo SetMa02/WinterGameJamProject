@@ -13,7 +13,9 @@ public class ResourceItem : MonoBehaviour
 
 		if (_item != null)
 		{
-			_spriteRenderer.sprite = _item.icon;
+			_spriteRenderer.sprite = _item.GetSprite();
+			float randomYRotation = Random.Range(0f, 360f);
+			transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, randomYRotation, transform.rotation.eulerAngles.z);
 		}
 		else
 		{
@@ -21,19 +23,22 @@ public class ResourceItem : MonoBehaviour
 		}
 	}
 
-	private void OnTriggerEnter(Collider other)
+	private void OnTriggerStay(Collider other)
 	{
 		PlayerInteraction player = other.GetComponent<PlayerInteraction>();
 		if (player != null)
 		{
-			if (player.Inventory.AddItem(_item))
+			if (Input.GetKeyDown(KeyCode.E))
 			{
-				Destroy(this.gameObject);
-				Debug.Log("Item added to inventory: " + _item.name);
-			}
-			else
-			{
-				Debug.Log("Inventory is full. Cannot add item: " + _item.name);
+				if (player.Inventory.AddItem(_item))
+				{
+					Destroy(this.gameObject);
+					Debug.Log("Item added to inventory: " + _item.name);
+				}
+				else
+				{
+					Debug.Log("Inventory is full. Cannot add item: " + _item.name);
+				}
 			}
 		}
 	}

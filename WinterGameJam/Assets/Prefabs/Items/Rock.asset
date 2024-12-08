@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6693857d18bd84ab65141062c66a64, type: 3}
   m_Name: Rock
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: ceae84747b0b26142a5dd55b3e2a19a8, type: 3}
+  sprites:
+  - {fileID: 21300000, guid: bb377f3043318524a8c188db8eb26ed8, type: 3}
+  - {fileID: 21300000, guid: 67f272bcc042e3c48a9baf95478319be, type: 3}
+  - {fileID: 21300000, guid: 198a462d73cf63b44981a0628b8c8767, type: 3}
   burnTimeAmount: 0
   heatIncreaseAmount: 0
   IsFuel: 0
