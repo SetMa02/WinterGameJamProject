@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 102149678}
   - component: {fileID: 102149680}
   - component: {fileID: 102149679}
+  - component: {fileID: 102149681}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -199,6 +200,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102149677}
   m_CullTransparentMesh: 1
+--- !u!114 &102149681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102149677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd2644f72ee4f4b44959ba5db6eb5178, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &149089263
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,6 +224,7 @@ GameObject:
   - component: {fileID: 149089266}
   - component: {fileID: 149089265}
   - component: {fileID: 149089267}
+  - component: {fileID: 149089268}
   m_Layer: 5
   m_Name: Panel (5)
   m_TagString: Untagged
@@ -331,6 +345,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 149089268}
+        m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
+        m_MethodName: ChangeSceneByName
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: WinterGameJamScene
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &149089268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149089263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9302b2426795f145863feb161d2112f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &231881814
 GameObject:
   m_ObjectHideFlags: 0
@@ -1012,13 +1050,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2042797024}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: 
+      - m_Target: {fileID: 102149681}
+        m_TargetAssemblyTypeName: ActicateGGVoice, Assembly-CSharp
+        m_MethodName: PlayIntroVoice
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

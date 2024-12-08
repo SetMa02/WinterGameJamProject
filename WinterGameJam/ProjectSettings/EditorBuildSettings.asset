@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: d4418a04e170c3e438a910959efe3990
+  - enabled: 1
     path: Assets/Scenes/WinterGameJamScene.unity
     guid: f81059774fec65c43a647b28a41341e2
+  - enabled: 1
+    path: Assets/Scenes/EndPresentation.unity
+    guid: 0ca0db7fe1a3b614bb56faaa2cbedd2e
   m_configObjects: {}

@@ -10,18 +10,23 @@ public class PlayerStatus : MonoBehaviour
 	[SerializeField] private float _zFogOffset;
 	[SerializeField] private float _maxTemperature = 100f;
 	[SerializeField] private float _currentTemperature;
-	[SerializeField] private float _temperatureDecreaseRate = 0.1f;
+	[SerializeField] private float _temperatureDecreaseRate = 0.05f;
 	[SerializeField] private float _temperatureIncreaseRate = 0.2f;
 	[SerializeField] private Image _uiFreezeEffect;
+	[SerializeField] private GameObject DeadPlayerObject;
+	[SerializeField] private CanvasGroup _DeathCanvasGroup;
+	
 	private bool _isFrozen = false;
-
 	private bool _isNearFire = false;
 	private float _fireHeatAmount = 1f;
 	private Vector3 _cleanFogSpot;
+	private Animator _animator;
+	private string IsFrozen = "IsFrozen";
 
 	private void Start()
 	{
 		_currentTemperature = _maxTemperature;
+		_animator = GetComponent<Animator>();
 	}
 
 	private void Update()
@@ -97,6 +102,12 @@ public class PlayerStatus : MonoBehaviour
 			SoundManager.Instance.PlaySound("Замерзания", transform.position, 2f);
 			Debug.Log("Игрок погиб!");
 			_isFrozen = true;
+
+			_DeathCanvasGroup.alpha = 1;
+			_DeathCanvasGroup.interactable = true;
+			_DeathCanvasGroup.blocksRaycasts = true;
+			
+			_animator.SetTrigger(IsFrozen);
 		}
 	}
 }
