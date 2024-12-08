@@ -22,6 +22,7 @@ public class FireManager : MonoBehaviour
 	private int _currentStageIndex;
 	private string _fireLevel = "FireLevel";
 	private Animator _animator;
+	private readonly string _isDead = "Isdead";
 
 	private void Start()
 	{
@@ -48,6 +49,7 @@ public class FireManager : MonoBehaviour
 			IsPlayerNearFire = false;
 			currentHeat = 0;
 			HeatPerSecond = 0;
+			_animator.SetBool(_isDead, true);
 		}
 	}
 
@@ -62,6 +64,8 @@ public class FireManager : MonoBehaviour
 		
 		IsPlayerNearFire = true;
 		HeatPerSecond = CurrentStage.HeatPerSecond;
+		
+		_animator.SetBool(_isDead, false);
 	}
 
 	public void AddStone()

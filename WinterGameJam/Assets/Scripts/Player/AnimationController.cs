@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -5,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class AnimationController : MonoBehaviour
 {
+	public bool IsPicking = false;
 	[SerializeField] private Animator _animator;
 	[SerializeField] private float _animationDelay = 0.2f;
 	[SerializeField] private float _fastForwardSpeed = 100f; // Ускорение старой анимации
@@ -16,14 +18,17 @@ public class AnimationController : MonoBehaviour
 	private readonly string IsInFront = "IsInFront";
 	private readonly string IsSideways = "IsSideways";
 	private readonly string Speed = "Speed";
+	private readonly string PickingTrigger = "IsPicking";
 
 	private Rigidbody _rigidbody;
 	private bool _canSwitch = true;
 	private string _currentAnimationState;
 	private float _speed;
+	private InventoryManager _inventoryManager;
 
 	private void Start()
 	{
+		_inventoryManager = GetComponent<InventoryManager>();
 		if (_animator == null)
 		{
 			_animator = GetComponent<Animator>();
@@ -31,6 +36,13 @@ public class AnimationController : MonoBehaviour
 
 		_rigidbody = GetComponent<Rigidbody>();
 		_currentAnimationState = IsInFront;
+
+		_inventoryManager.OnInventoryChanged += PickItemAnimation;
+	}
+
+	private void OnDestroy()
+	{
+		_inventoryManager.OnInventoryChanged -= PickItemAnimation;
 	}
 
 	private void Update()
@@ -42,6 +54,11 @@ public class AnimationController : MonoBehaviour
 		{
 			TrackCurrentState();
 		}
+	}
+
+	private void PickItemAnimation()
+	{
+		_animator.SetTrigger(PickingTrigger);
 	}
 
 	private void TrackCurrentState()
