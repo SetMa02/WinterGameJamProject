@@ -7269,6 +7269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e7a5b36e27851642a1b76c9b6bffbef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  poolSize: 10
 --- !u!4 &1442592638
 Transform:
   m_ObjectHideFlags: 0
@@ -11213,6 +11214,14 @@ PrefabInstance:
     - target: {fileID: 7154850758441628553, guid: 15a93b6863f6ce048afb32c26b0bff37, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7540568347561848776, guid: 15a93b6863f6ce048afb32c26b0bff37, type: 3}
+      propertyPath: _footstepWidth
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7540568347561848776, guid: 15a93b6863f6ce048afb32c26b0bff37, type: 3}
+      propertyPath: _footstepSpawnDistance
+      value: 0.7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
