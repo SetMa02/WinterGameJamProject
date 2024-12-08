@@ -46,6 +46,8 @@ public class Tree : MonoBehaviour
 		_trunk.SetActive(false);
 		_log.SetActive(true);
 		_log.transform.position = _trunk.transform.position;
+		_log.transform.localScale = _log.transform.localScale * 5f;
+		_log.transform.rotation = new Quaternion(-90, _log.transform.rotation.y, _log.transform.rotation.z, _log.transform.rotation.w);
 		_collider.isTrigger = true;
 	}
 
