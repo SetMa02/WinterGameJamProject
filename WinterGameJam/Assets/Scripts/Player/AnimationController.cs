@@ -78,6 +78,7 @@ public class AnimationController : MonoBehaviour
 	{
 		if (_inventoryManager.HasItem(_axe))
 		{
+			Debug.Log(_inventoryManager.HasItem(_axe));
 			IsChopping = true;
 			_animator.SetTrigger(StartChoppingTrigger);
 			_animator.SetBool(IsChoppingAnim, true);
