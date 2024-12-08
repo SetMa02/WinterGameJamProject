@@ -30,6 +30,7 @@ public class PlayerInteraction : MonoBehaviour
 						default:
 							if (selectedItem.IsFuel)
 							{
+								SoundManager.Instance.PlaySound("ЗажигКостра", gameObject.transform.position);
 								Debug.Log("Added burn time: " + selectedItem.burnTimeAmount + " and heat: " + selectedItem.heatIncreaseAmount);
 								manager.AddHeat(selectedItem.burnTimeAmount);
 								manager.AddHeat(selectedItem.heatIncreaseAmount);
